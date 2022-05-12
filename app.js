@@ -51,11 +51,12 @@ $(document).ready(function() {
 //change screens:
 /* hide all the screens except the welcome page*/
 function welcomePage(){
-	$('#welcome').css('display','block');
 	$('#signup').css('display','none');
 	$('#login').css('display','none');
 	$('#settings').css('display','none');
 	$('#game-section').css('display','none');
+	$('#welcome').css('display','block');
+
 }
 
 
