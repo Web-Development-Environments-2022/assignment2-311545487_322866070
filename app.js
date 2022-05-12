@@ -157,22 +157,22 @@ function randomColor(){
 }
 
 function upKeyListener(event){
-	Up_key = event.keyCode;
+	upKey = event.keyCode;
 	nameUpKey = event.key;
 	$('#up-key').val(nameUpKey);
 }
 function downKeyListener(event){
-	Down_key = event.keyCode;
+	downKey = event.keyCode;
 	nameDownKey = event.key;
 	$('#down-key').val(nameDownKey);
 }
 function leftKeyListener(event){
-	left_key = event.keyCode;
+	leftKey = event.keyCode;
 	nameLeftKey = event.key;
 	$('#left-key').val(nameLeftKey);
 }
 function rightKeyListener(event){
-	Right_key = event.keyCode;
+	rightKey = event.keyCode;
 	nameRightKey = event.key;
 	$('#right-key').val(nameRightKey);
 }
@@ -724,6 +724,7 @@ function GhostsMove(){
     }
 }
 */
+
 function GetKeyPressed() {
     /*
     http://gcctech.org/csc/javascript/javascript_keycodes.htm- קביעת לחצני המשחק
