@@ -142,14 +142,20 @@ body {
     padding: 0;
     margin: 0;
   }
+/* 
+  #arrow-img {
+    width: 55px;
+    height: 63px;
+  } */
 
   #footer{
-    /* position: absolute; */
+    position: fixed;
     background-color: #e6e6e690;
     font-size: 15px;
     width: 100%;
     color: rgba(81, 81, 81, 0.808);
     text-align: center;
+    bottom: 0;
   }
 
   #footer:hover{

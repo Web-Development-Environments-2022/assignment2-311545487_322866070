@@ -43,10 +43,24 @@ let direction='right'
 
 $(document).ready(function() {
 	welcomePage();
-	
+
 	// Start();
 });
 
+  
+const login_func = () => {
+	stopMusicSound();
+	let userName = document.getElementById('uname2').value;
+	let password = document.getElementById('password2').value;
+  
+	if (localStorage.getItem(userName) === null) {
+	  alert('wrong password');
+	} else if (localStorage.getItem(userName) === password) {
+	  alert('You are looged in, moving to game');
+	  $('#login').hide();
+	  $('#settings').show();
+	}
+  };
 
 //change screens:
 /* hide all the screens except the welcome page*/
@@ -100,16 +114,16 @@ function setupGame(upKeyInput, downKeyInput, leftKeyInput, rightKeyInput, numBal
 
 function settingValidator(){
 	let validSetting = true;
-	let upKeyInput = document.forms["setting-form"]["upKey"].value;
-	let downKeyInput = document.forms["setting-form"]["downKey"].value;
-	let leftKeyInput = document.forms["setting-form"]["leftKey"].value;
-	let rightKeyInput = document.forms["setting-form"]["rightKey"].value;
-	let numBallsInput = document.forms["setting-form"]["num-balls"].value;
-	let smallBallColorInput = document.forms["setting-form"]["small-ball-color"].value;
-	let mediumBallColorInput = document.forms["setting-form"]["medium-ball-color"].value;
-	let bigBallColorInput = document.forms["setting-form"]["big-ball-color"].value;
-	let playTimeInput = document.forms["setting-form"]["play-time"].value;
-	let numMonstersInput = document.forms["setting-form"]["num-monsters"].value;
+	let upKeyInput = document.forms["settings-form"]["upKey"].value;
+	let downKeyInput = document.forms["settings-form"]["downKey"].value;
+	let leftKeyInput = document.forms["settings-form"]["leftKey"].value;
+	let rightKeyInput = document.forms["settings-form"]["rightKey"].value;
+	let numBallsInput = document.forms["settings-form"]["num-balls"].value;
+	let smallBallColorInput = document.forms["settings-form"]["small-ball-color"].value;
+	let mediumBallColorInput = document.forms["settings-form"]["medium-ball-color"].value;
+	let bigBallColorInput = document.forms["settings-form"]["big-ball-color"].value;
+	let playTimeInput = document.forms["settings-form"]["play-time"].value;
+	let numMonstersInput = document.forms["settings-form"]["num-monsters"].value;
 	
 	let letter = /[a-z,A-Z]/g;
 	let isLetter = playTimeInput.match(letter);
@@ -130,10 +144,13 @@ function settingValidator(){
 		validSetting = false;
 	}
 	if(!validSetting){
+		window.alert("Invalid Setting!");
 		return false;
 	}
 	else{
-		return setupGame(upKeyInput, downKeyInput, leftKeyInput, rightKeyInput, numBallsInput, smallBallColorInput, mediumBallColorInput, bigBallColorInput, playTimeInput, numMonstersInput);
+		startGameHandler();
+		// return setupGame(upKeyInput, downKeyInput, leftKeyInput, rightKeyInput, numBallsInput, smallBallColorInput, mediumBallColorInput, bigBallColorInput, playTimeInput, numMonstersInput);
+		return false;
 	}
 }
 

@@ -6,6 +6,8 @@
 		<link rel="stylesheet" href="./style.css">
 		<link href="http://fonts.cdnfonts.com/css/destroy" rel="stylesheet">
 		<link href="http://fonts.cdnfonts.com/css/fff-tusj" rel="stylesheet">
+		<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/additional-methods.js"></script>
 		<script src="./jquery-3.4.1.slim.min.js"></script>
 		<script type="text/javascript" src="./app.js"></script>
 	</head>
@@ -39,10 +41,14 @@
 			<h3>Lets Play!</h3>
 			<p>
 				If you have a user login to start playing:
-				<button id="login-btn" class="btns" onclick="pageHandler('#login');">Login</button>
 				<br>
+				<!-- <img src="pics/arrow_down.png" id="arrow-img" align="center">
+				<br> -->
+				<button id="login-btn" class="btns" align="center" onclick="pageHandler('#login');">Login</button>
+				
 				<br>Otherwise, signup now and start playing:
-				<button id="signup-btn" class="btns" onclick="pageHandler('#signup');">Signup</button>
+				<br>
+				<button id="signup-btn" class="btns" align="center" onclick="pageHandler('#signup');">Signup</button>
 			</p>
 				<!-- BUTTONS FOR TESTING ONLY -->
 				<hr>
@@ -354,7 +360,7 @@
 		<div>
 			<h1>Select Your Setting</h1>
 			<hr> 
-			<form id="settings-form" name="settingsForm" align="center" autocomplete="off" onsubmit="return settingValidator();">
+			<form id="settings-form" name="settingsForm" align="center" autocomplete="off">
 				<p>
 					Up Key:
 					<input id="up-key" name="upKey" type="text" onkeydown="upKeyListener(event)" maxlength="1" placeholder="Up Key">
@@ -398,7 +404,7 @@
 
 				<div class="settingButton" >
 					<div>
-						<button id='setting' class="btns" type="submit" align="center" onclick="startGameHandler();">Let's Play</button>
+						<button id='setting' class="btns" type="submit" align="center" onclick="return settingValidator();">Let's Play</button>
 						<button id='settingRandom' class="btns" type="text" align="center" onclick="return randomSetting();" >Random</button>
 					</div>
 					
