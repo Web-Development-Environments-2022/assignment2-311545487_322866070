@@ -89,7 +89,8 @@ body {
     background-clip: text;
     -webkit-background-clip: text;
     /* font-family: 'Destroy', sans-serif;'Helvetica Neue', sans-serif;  */
-    font-family: 'FFF Tusj', sans-serif;
+    /* font-family: 'FFF Tusj', sans-serif; */
+    font-family: 'Helvetica Neue', sans-serif;
     font-size: 60px; 
     font-weight: bold; 
     letter-spacing: -1px; 
@@ -108,8 +109,8 @@ body {
     background: black;
     background-clip: text;
     -webkit-background-clip: text;
-    /* font-family: 'Calibri', sans-serif;  */
-    font-family: 'FFF Tusj', sans-serif;
+    font-family: 'Calibri', sans-serif; 
+    /* font-family: 'FFF Tusj', sans-serif; */
     font-size: 28px; 
     line-height: 1.5;
     align-items:center;
