@@ -41,26 +41,16 @@ let clock=0;//הוספת שעון שמגדיל את זמן המשחק
 users['k']='k';
 let direction='right'
 
+let gameOn = false;
+let song = new Audio('sound/cottoneyejo.mp3');
+
+let movingPoints = false;
+
 $(document).ready(function() {
 	welcomePage();
 
 	// Start();
 });
-
-  
-const login_func = () => {
-	stopMusicSound();
-	let userName = document.getElementById('uname2').value;
-	let password = document.getElementById('password2').value;
-  
-	if (localStorage.getItem(userName) === null) {
-	  alert('wrong password');
-	} else if (localStorage.getItem(userName) === password) {
-	  alert('You are looged in, moving to game');
-	  $('#login').hide();
-	  $('#settings').show();
-	}
-  };
 
 //change screens:
 /* hide all the screens except the welcome page*/
@@ -70,6 +60,11 @@ function welcomePage(){
 	$('#settings').css('display','none');
 	$('#game-section').css('display','none');
 	$('#welcome').css('display','block');
+
+	// context.beginPath();
+	// let firefox_ghost = new Image(canvas.width / 40,  canvas.height / 40);
+	// firefox_ghost.src = './pics/ghost_firefox.png';
+	// context.drawImage(
 
 }
 
@@ -88,10 +83,24 @@ const hide = () => {
 	$('#settings').hide();
 	$('#game-section').hide();
 	// $('#about').hide();
-  
+	// 
+	if(gameOn){
+		song.pause();
+		song.currentTime = 0;
+		gameOn = false;
+	}
 	Stop();
   };
 
+//   const playMusic = () => {
+// 	document.getElementById('song_id').play();
+// 	document.getElementById('song_id').volume = 0.5;
+//   };
+
+//   const stopMusic = () => {
+// 	document.getElementById('song_id').pause();
+// 	document.getElementById('song_id').currentTime = 0;
+//   };
 
 /* Settings Page: */
 // setting validator 
@@ -211,6 +220,7 @@ const startGameHandler = () => {
 function Start() {
 	board = new Array();
 	score = 0;
+    movingPoints = true;
 	pac_color = "yellow";
 	var cnt = 100;
 	var food_remain = 15;//קביעת מספר כדורים למשחק
@@ -264,6 +274,7 @@ function Start() {
 				cnt--;
 			}
 		}
+		
 	}
 	while (food_remain > 0) {
 		var emptyCell = findRandomEmptyCell(board);
@@ -307,6 +318,8 @@ function Start() {
 	);
 	interval = setInterval(UpdatePosition, 250);
 	intervalGhosts=setInterval(GhostsMove2, 2000);
+	gameOn = true;
+	song.play();
 }
 
 const Stop = () => {
@@ -336,6 +349,7 @@ function PacmanMeetGhost(){
     else{
         Draw();
         lblScore.value = score;
+        // Call Stop() instead
         window.clearInterval(interval);
         window.clearInterval(intervalGhosts);
         window.alert("Game Ended- No More Lives.");
@@ -440,6 +454,9 @@ function GhostsMove2(){
         }
     }
 }
+
+
+	
 
 
 /*
@@ -776,6 +793,9 @@ function putPacmanRandomly(){
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
+
+
+
 async function Draw() {
     if(time_elapsed<60+clock){ //קביעת זמן עבור כל המשחק
         if(clock==20){lblTime.value = time_elapsed.toString()+" +20 (For Clock Eat)";}//הוספת שעון שמגדיל את זמן המשחק
@@ -843,19 +863,56 @@ async function Draw() {
                     context.fill();
                 } else if (board[i][j] == 15) {
                     randomGhost=true;
+
                     for (var k=0; k<ghostsCounter; k++){
                         if(ghostsLocs[k][0]==i && ghostsLocs[k][1]==j){
-                            context.beginPath();
-                            //context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // brown circle- ghost
-                            context.arc(center.x, center.y, 7.5, 0, 2 * Math.PI); // brown circle- ghost
-                            context.fillStyle = "brown"; //color
-                            context.fill();
-                            randomGhost=false;
+							if(k == 0){
+								context.beginPath();
+								// context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // brown circle- ghost
+								// // context.arc(center.x, center.y, 7.5, 0, 2 * Math.PI); // brown circle- ghost
+								// context.fillStyle = "brown"; //color
+								// context.fill();
+								let firefox_ghost = new Image();
+								firefox_ghost.src = './pics/ghost_firefox_1.png';
+								context.drawImage(firefox_ghost, center.x - 12, center.y - 12);
+								randomGhost=false;
+							} else if(k == 1){
+								context.beginPath();
+								let edge_ghost = new Image();
+								edge_ghost.src = './pics/ghost_edge_1.png';
+								context.drawImage(edge_ghost, center.x - 12, center.y - 12);
+								randomGhost=false;
+							} else if(k == 2){
+								context.beginPath();
+								let opera_ghost = new Image();
+								opera_ghost.src = './pics/ghost_opera_1.png';
+								context.drawImage(opera_ghost, center.x - 12, center.y - 12);
+								randomGhost=false;
+							} else if(k == 3){
+								context.beginPath();
+								let safari_ghost = new Image();
+								safari_ghost.src = './pics/ghost_safari_1.png';
+								context.drawImage(safari_ghost, center.x - 12, center.y - 12);
+								randomGhost=false;
+							}
+							
+							// [ghostX][ghostY]
+							
+							// firefox_ghost.image = new Image(canvas.width / maze[0].length,  canvas.height / maze.length);
+							// firefox_ghost.image.src = './pics/ghost_firefox.png';
                         }
                     }
                     if(randomGhost){
                         board[i][j]=0;
                     }
+                // else if (board[i][j] == 31) { //ציור הניקוד הזז 
+                //     context.beginPath();
+                //     let movingPointsIcon = new Image();
+                //     movingPointsIcon.src = './pics/candy_ram_1.png';
+                //     context.drawImage(movingPointsIcon, center.x - 12, center.y - 12);
+                //     // movingPoints.active = true;
+                // }
+
                 } else if (board[i][j] == 5) {//קביעת צבעים לכדורים
                     context.beginPath();
                     //context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // green circle- 15 pts
@@ -901,7 +958,8 @@ async function Draw() {
 	else{
 	    lblTime.value=60+clock;//קביעת זמן עבור כל המשחק, הוספת שעון שמגדיל את זמן המשחק
         await sleep(1);//קביעת זמן עבור כל המשחק
-	    window.clearInterval(interval);
+	    // Call Stop() instead
+        window.clearInterval(interval);
 	    window.clearInterval(intervalGhosts);
 	    end=60+clock;//הוספת שעון שמגדיל את זמן המשחק
         window.alert("Game ended- "+end.toString()+ " seconds passed");//קביעת זמן עבור כל המשחק
@@ -963,6 +1021,7 @@ function UpdatePosition() {
 	if (score == maxScore) {
 	    Draw();
 	    lblScore.value = score;
+        // Call Stop() instead
 		window.clearInterval(interval);
 		window.clearInterval(intervalGhosts);
 		window.alert("Game completed");
@@ -970,3 +1029,21 @@ function UpdatePosition() {
 		Draw();
 	}
 }
+
+function gameTimeOut(){
+    Stop();
+    gameOn = false;	
+	if(score < 100){
+		song.pause();
+        song.currentTime = 0;
+		alert("You are better than " + score + " points!");
+	}
+	else{
+		song.pause();
+		gameMusic.currentTime = 0;
+		alert("Winner!");
+	}
+	pageHandler('#settings');
+}
+
+const 
