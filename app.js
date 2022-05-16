@@ -1046,4 +1046,3 @@ function gameTimeOut(){
 	pageHandler('#settings');
 }
 
-const 
