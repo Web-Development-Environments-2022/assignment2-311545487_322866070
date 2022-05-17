@@ -18,6 +18,11 @@
   display: 'block';
 }
 
+@font-face {
+  font-family: "myFont";
+  src: url("./fonts/FFF_Tusj.ttf");
+}
+
 body {
     min-width: 100%; /* 800px */
     background: #ffffff;  /* fallback for old browsers */
@@ -109,8 +114,8 @@ body {
     background-clip: text;
     -webkit-background-clip: text;
     /* font-family: 'Destroy', sans-serif;'Helvetica Neue', sans-serif;  */
-    /* font-family: 'FFF Tusj', sans-serif; */
-    font-family: Verdana, sans-serif;
+    font-family: 'myFont', sans-serif;
+    /* font-family: Verdana, sans-serif; */
     /* font-family: 'Helvetica Neue', sans-serif; */
     /* font-family: 'Comic Sans MS', 'Comic Sans', 'cursive'; */
     font-size: 60px; 
