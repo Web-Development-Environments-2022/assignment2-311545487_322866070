@@ -1,3 +1,23 @@
+#signup{
+  display: 'none';
+}
+
+#login{
+  display: 'none';
+}
+
+#settings{
+  display: 'none';
+}
+
+#game-section{
+  display: 'none';
+}
+
+#welcome{
+  display: 'block';
+}
+
 body {
     min-width: 100%; /* 800px */
     background: #ffffff;  /* fallback for old browsers */
@@ -90,7 +110,9 @@ body {
     -webkit-background-clip: text;
     /* font-family: 'Destroy', sans-serif;'Helvetica Neue', sans-serif;  */
     /* font-family: 'FFF Tusj', sans-serif; */
-    font-family: 'Helvetica Neue', sans-serif;
+    font-family: Verdana, sans-serif;
+    /* font-family: 'Helvetica Neue', sans-serif; */
+    /* font-family: 'Comic Sans MS', 'Comic Sans', 'cursive'; */
     font-size: 60px; 
     font-weight: bold; 
     letter-spacing: -1px; 
@@ -105,11 +127,13 @@ body {
   }
 
   p {
-    color: black; 
-    background: black;
+    color: rgb(67, 67, 67); 
+    background: rgb(47, 47, 47);
     background-clip: text;
     -webkit-background-clip: text;
-    font-family: 'Calibri', sans-serif; 
+    font-family: Verdana, sans-serif;
+    /* font-family: 'Comic Sans MS', 'Comic Sans', 'cursive'; */
+    /* font-family: 'Calibri', sans-serif;  */
     /* font-family: 'FFF Tusj', sans-serif; */
     font-size: 28px; 
     line-height: 1.5;

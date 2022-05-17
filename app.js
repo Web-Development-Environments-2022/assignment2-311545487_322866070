@@ -57,11 +57,23 @@ let pacmanMouthIconUp;
 let pacmanMouthIconDown;
 let pacmanMouthIconRight;
 let pacmanMouthIconLeft;
+let clockIcon;
+let medicineIcon;
+let extraLifeIcon;
+let doubleExtraLifeIcon;
 
 let numBalls;
 let smallBallColor;
 let mediumBallColor;
 let bigBallColor;
+
+
+let randNumBalls;
+let randSmallBallColor;
+let randMediumBallColor;
+let randBigBallColor;
+let randPlayTime;
+let randNumGhosts;
 
 let movingPoints = false;
 
@@ -70,7 +82,6 @@ let movementSettings=[38,40,37,39];
 
 $(document).ready(function() {
 	welcomePage();
-
 	// Start();
 });
 
@@ -82,12 +93,6 @@ function welcomePage(){
 	$('#settings').css('display','none');
 	$('#game-section').css('display','none');
 	$('#welcome').css('display','block');
-
-	// context.beginPath();
-	// let firefox_ghost = new Image(canvas.width / 40,  canvas.height / 40);
-	// firefox_ghost.src = './pics/ghost_firefox.png';
-	// context.drawImage(
-
 }
 
 
@@ -98,38 +103,30 @@ const pageHandler = (tab) => {
   };
   
 const hide = () => {
-	// $('#GameBox').hide();
 	$('#welcome').hide();
 	$('#signup').hide();
 	$('#login').hide();
 	$('#settings').hide();
 	$('#game-section').hide();
 	// $('#about').hide();
-	// 
 	if(gameOn){
 		song.pause();
 		song.currentTime = 0;
+        Stop();
 		gameOn = false;
 	}
-	Stop();
   };
 
   const pauseMusic = () => {
     if(song.paused == true){
-        // song.muted = false;
         song.play();
         $('#song-ctrl').text("Pause Song");
     }else{
-        // song.muted = true;
         song.pause();
         $('#song-ctrl').text("Play Song");
     }
   };
 
-//   const stopMusic = () => {
-// 	document.getElementById('song_id').pause();
-// 	document.getElementById('song_id').currentTime = 0;
-//   };
 
 function setupGame(upKeyInput, downKeyInput, leftKeyInput, rightKeyInput, numBallsInput, smallBallColorInput, mediumBallColorInput, bigBallColorInput, playTimeInput, numMonstersInput){
 	upKey = upKeyInput;
@@ -159,8 +156,17 @@ function settingValidator(){
 	let mediumBallColorInput = document.forms["settings-form"]["medium-ball-color"].value;
 	let bigBallColorInput = document.forms["settings-form"]["big-ball-color"].value;
 	let playTimeInput = document.forms["settings-form"]["play-time"].value;
-	let numMonstersInput = document.forms["settings-form"]["num-monsters"].value;
-	
+	let numGhostsInput = document.forms["settings-form"]["num-ghosts"].value;
+
+    numBalls = numBallsInput;
+    smallBallColor = smallBallColorInput;
+    mediumBallColor = mediumBallColorInput;
+    bigBallColor = bigBallColorInput;
+    // console.log(smallBallColor);
+    // console.log(mediumBallColor);
+    // console.log(bigBallColor);
+
+
 	let letter = /[a-z,A-Z]/g;
 	let isLetter = playTimeInput.match(letter);
 
@@ -176,7 +182,7 @@ function settingValidator(){
 	if(rightKeyInput=='' || rightKeyInput==downKeyInput || rightKeyInput==upKeyInput || rightKeyInput==leftKeyInput){
 		validSetting = false;
 	}
-	if(playTimeInput < 60 || playTimeInput == null || isLetter != null){
+	if(playTimeInput == null || isLetter != null){
 		validSetting = false;
 	}
 	if(!validSetting){
@@ -186,34 +192,38 @@ function settingValidator(){
 	else{
 		startGameHandler();
         movementSettingsValid=true;
-        numBallsInput = numBalls;
-        smallBallColorInput = smallBallColor;
-        mediumBallColorInput = mediumBallColor;
-        bigBallColorInput = bigBallColor;
 		// return setupGame(upKeyInput, downKeyInput, leftKeyInput, rightKeyInput, numBallsInput, smallBallColorInput, mediumBallColorInput, bigBallColorInput, playTimeInput, numMonstersInput);
 		return false;
 	}
 }
 
+// const randomColor = () => {
+// 	let randColorNum = Math.floor(Math.random()*16777215).toString(16);
+// 	let colorVal = "#" + randColorNum; 
+// 	return colorVal;
+// }
+
 function randomSetting(){
+    randNumBalls = Math.floor(Math.random() * 40) + 40;
+    // randSmallBallColor = randomColor();
+    randSmallBallColor = "#" + Math.floor(Math.random()*16777215).toString(16);
+    randMediumBallColor = "#" + Math.floor(Math.random()*16777215).toString(16);//randomColor();
+    randBigBallColor = "#" + Math.floor(Math.random()*16777215).toString(16); //randomColor();
+    randPlayTime = Math.floor(Math.random() * 600) + 60;
+    randNumGhosts = Math.floor(Math.random() * 4) + 1;
 	$("#up-key").val("ArrowUp");
 	$("#down-key").val("ArrowDown");
 	$("#left-key").val("ArrowLeft");
 	$("#right-key").val("ArrowRight");
-	$("#num-balls-id").val(Math.floor(Math.random() * 40) + 50);
-	$("#small-ball-color").val(randomColor());
-	$("#medium-ball-color").val(randomColor());
-	$("#big-ball-color").val(randomColor());
-	$("#play-time").val(Math.floor(Math.random() * 120) + 60);
-	$("#num-monsters").val(Math.floor(Math.random() * 4) + 1);
+    $("#num-balls-id").val(randNumBalls);
+	$("#small-ball-color").val(randSmallBallColor);
+	$("#medium-ball-color").val(randMediumBallColor);
+	$("#big-ball-color").val(randBigBallColor);
+	$("#play-time").val(randPlayTime);
+	$("#num-ghosts").val(randNumGhosts);
 	return false;
 }
 
-function randomColor(){
-	let randColorNum = Math.floor(Math.random()*16777215).toString(16);
-	let colorVal = "#" + randColorNum; 
-	return colorVal;
-}
 
 function upKeyListener(event){
 	upKey = event.keyCode;
@@ -260,9 +270,7 @@ function Start() {
 	var cnt = 100;
 	var food_remain = 15;//קביעת מספר כדורים למשחק
 	var pacman_remain = 1;
-    loadGhostsImgs();
-    loadMovingScoreImg();
-    loadPacmanImg();
+    loadImgs();
 	start_time = new Date();
 	for (var i = 0; i < 20; i++) {
 		board[i] = new Array();
@@ -301,11 +309,6 @@ function Start() {
 					    board[i][j] = 10;
 					    maxScore=maxScore+25;
 					}
-		//		} else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) { //their pacman draw
-		//			shape.i = i;
-		//			shape.j = j;
-		//			pacman_remain--;
-		//			board[i][j] = 2;
 				} else {
 					board[i][j] = 0;
 				}
@@ -565,6 +568,32 @@ function GhostsMove2(){
     }
 }
 
+const loadImgs = () => {
+    loadGhostsImgs();
+    loadMovingScoreImg();
+    loadPacmanImg();
+    loadClockImg();
+    loadMedicineImg();
+    extraLifeImgs();
+};
+
+const extraLifeImgs = () => {
+    extraLifeIcon = new Image();
+    extraLifeIcon.src = './pics/extra_life.png';
+    doubleExtraLifeIcon = new Image();
+    doubleExtraLifeIcon.src = './pics/double_extra_life.png';
+};
+
+const loadMedicineImg = () => {
+    medicineIcon = new Image();
+    medicineIcon.src = './pics/medicine.png';
+};
+
+const loadClockImg = () => {
+    clockIcon = new Image();
+    clockIcon.src = './pics/clock.png';
+};
+
 const loadPacmanImg = () => {
     pacmanIcon = new Image();
     pacmanIcon.src = './pics/chrome_1.png';
@@ -592,7 +621,6 @@ const loadGhostsImgs = () => {
     opera_ghost.src = './pics/ghost_opera_1.png';
     safari_ghost = new Image();
     safari_ghost.src = './pics/ghost_safari_1.png';
-
 };
 
 
@@ -944,55 +972,42 @@ async function Draw() {
         lblLives.value=lives;
         canvas.width = canvas.width; //clean board
         lblScore.value = score;
-        
         for (var i = 0; i < 20; i++) {
             for (var j = 0; j < 20; j++) {
                 var center = new Object();
-                //center.x = i * 60 + 30;
                 center.x = i * 30 + 15;
-                //center.y = j * 60 + 30;
                 center.y = j * 30 + 15;
                 if (board[i][j] == 2) {
                     if(i==shape.i && j==shape.j){
                         context.beginPath();
                         if(direction=='right'){//יש לצייר את הפאקמן שיהיה תמיד בכיוון האכילה
-                            //context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // pacman circle right
                             context.arc(center.x, center.y, 15, 0.15 * Math.PI, 1.85 * Math.PI); // pacman circle right
                             context.drawImage(pacmanMouthIconRight, center.x - 13, center.y - 13);
                         }
                         if(direction=='left'){
-                            //context.arc(center.x, center.y, 30, 1.15 * Math.PI, 0.85 * Math.PI); // pacman circle left
                             context.arc(center.x, center.y, 15, 1.15 * Math.PI, 0.85 * Math.PI); // pacman circle left
                             context.drawImage(pacmanMouthIconLeft, center.x - 13, center.y - 13);
                         }
                         if(direction=='up'){
-                            //context.arc(center.x, center.y, 30, 1.65 * Math.PI, 1.35 * Math.PI); // pacman circle up
                             context.arc(center.x, center.y, 15, 1.65 * Math.PI, 1.35 * Math.PI); // pacman circle up
                             context.drawImage(pacmanMouthIconUp, center.x - 13, center.y - 13);
                         }
                         if(direction=='down'){
-                            //context.arc(center.x, center.y, 30, 0.65 * Math.PI, 0.35 * Math.PI); // pacman circle down
                             context.arc(center.x, center.y, 15, 0.65 * Math.PI, 0.35 * Math.PI); // pacman circle down
                             context.drawImage(pacmanMouthIconDown, center.x - 13, center.y - 13);
                         }
                         context.lineTo(center.x, center.y);
-                        context.fillStyle = pac_color; //color
-                        // context.fill();
                         context.beginPath();
                         if(direction=='right'){//יש לצייר את הפאקמן שיהיה תמיד בכיוון האכילה
-                            //context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // eye right
                             context.arc(center.x + 2.5, center.y - 7.5, 2.5, 0, 2 * Math.PI); // eye right
                         }
                         if(direction=='left'){
-                            //context.arc(center.x - 5, center.y - 15, 5, 0, 2 * Math.PI); // eye left
                             context.arc(center.x - 2.5, center.y - 7.5, 2.5, 0, 2 * Math.PI); // eye left
                         }
                         if(direction=='up'){
-                            //context.arc(center.x - 15, center.y - 5, 5, 0, 2 * Math.PI); // eye up
                             context.arc(center.x - 7.5, center.y - 2.5, 2.5, 0, 2 * Math.PI); // eye up
                         }
                         if(direction=='down'){
-                            //context.arc(center.x + 15, center.y + 5, 5, 0, 2 * Math.PI); // eye down
                             context.arc(center.x + 7.5, center.y + 2.5, 2.5, 0, 2 * Math.PI); // eye down
                         }
                         context.fillStyle = "black"; //color
@@ -1001,12 +1016,6 @@ async function Draw() {
                     else{
                         board[i][j]=0;
                     }
-                } else if (board[i][j] == 1) {
-                    context.beginPath();
-                    //context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // black circle- 5 pts
-                    context.arc(center.x, center.y, 7.5, 0, 2 * Math.PI); // black circle- 5 pts
-                    context.fillStyle = "black"; //color
-                    context.fill();
                 } else if (board[i][j] == 15) {
                     randomGhost=true;
 
@@ -1014,10 +1023,6 @@ async function Draw() {
                         if(ghostsLocs[k][0]==i && ghostsLocs[k][1]==j){
 							if(k == 0){
 								context.beginPath();
-								// context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // brown circle- ghost
-								// // context.arc(center.x, center.y, 7.5, 0, 2 * Math.PI); // brown circle- ghost
-								// context.fillStyle = "brown"; //color
-								// context.fill();
 								context.drawImage(firefox_ghost, center.x - 12, center.y - 12);
 								randomGhost=false;
 							} else if(k == 1){
@@ -1047,45 +1052,37 @@ async function Draw() {
                         board[i][j]=0;
                     }
 
-                } else if (board[i][j] == 5) {//קביעת צבעים לכדורים
+                } else if (board[i][j] == 1) { // small ball - 5 pts
                     context.beginPath();
-                    //context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // green circle- 15 pts
-                    context.arc(center.x, center.y, 7.5, 0, 2 * Math.PI); // green circle- 15 pts
-                    context.fillStyle = "green"; //color
+                    context.arc(center.x, center.y, 7.5, 0, 2 * Math.PI); // black circle- 5 pts
+                    context.fillStyle = smallBallColor; //color
                     context.fill();
-                } else if (board[i][j] == 10) {//קביעת צבעים לכדורים
+                } else if (board[i][j] == 5) { // medium ball - 15 pts קביעת צבעים לכדורים
                     context.beginPath();
-                    //context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // blue circle- 25 pts
-                    context.arc(center.x, center.y, 7.5, 0, 2 * Math.PI); // blue circle- 25 pts
-                    context.fillStyle = "blue"; //color
-                    // context.fillStyle = bigBallColor; //color
+                    context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // green circle- 15 pts
+                    context.fillStyle = mediumBallColor; //color
                     context.fill();
-                } else if (board[i][j] == 20) {//קביעת צבעים לכדורים
+                } else if (board[i][j] == 10) {// big ball - 25 pts קביעת צבעים לכדורים
                     context.beginPath();
-                    //context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // clock
-                    context.arc(center.x, center.y, 7.5, 0, 2 * Math.PI); // clock
-                    context.fillStyle = "cyan"; //color
+                    context.arc(center.x, center.y, 12.5, 0, 2 * Math.PI); // blue circle- 25 pts
+                    context.fillStyle = bigBallColor; //color
                     context.fill();
-                } else if (board[i][j] == 4) {
+                } else if (board[i][j] == 20) { // clock
                     context.beginPath();
-                    //context.rect(center.x - 30, center.y - 30, 60, 60);
+                    context.drawImage(clockIcon, center.x - 13, center.y - 13); // clock
+                } else if (board[i][j] == 4) { // walls color
+                    context.beginPath();
                     context.rect(center.x - 15, center.y - 15, 30, 30);
                     context.fillStyle = "grey"; //color
                     context.fill();
                 }
-                else if (board[i][j] == 25){
+                else if (board[i][j] == 25){ // Extra Life
                     context.beginPath();
-                    //context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // Extra Life
-                    context.arc(center.x, center.y, 7.5, 0, 2 * Math.PI); // Extra Life
-                    context.fillStyle = "orange"; //color
-                    context.fill();
+                    context.drawImage(extraLifeIcon, center.x - 13, center.y - 13); // Extra Life
                 }
-                else if (board[i][j] == 30){
+                else if (board[i][j] == 30){ // Double Extra Life
                     context.beginPath();
-                    //context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // Double Extra Life
-                    context.arc(center.x, center.y, 7.5, 0, 2 * Math.PI); // Double Extra Life
-                    context.fillStyle = "yellow"; //color
-                    context.fill();
+                    context.drawImage(doubleExtraLifeIcon, center.x - 13, center.y - 13);
                 }
             }
         }
