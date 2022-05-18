@@ -41,7 +41,7 @@ let ghostsCounter=0;
 let ghostsLimit=4;
 let clock=0;//הוספת שעון שמגדיל את זמן המשחק
 users['k']='k';
-let direction='right'
+let direction='right';
 let movementSettingsValid=false;
 let movementSettings=[38,40,37,39];
 let numBalls=50;
@@ -79,7 +79,7 @@ let randPlayTime;
 let randNumGhosts;
 
 let movingPoints = false;
-
+let food_left_dynamic;
 //let movementSettingsValid=false;
 //let movementSettings=[38,40,37,39];
 
@@ -196,6 +196,7 @@ function settingValidator(){
 	    lblGhosts.value=numGhostsInput;
 	    movementSettingsValid=true;
 	    numBalls=numBallsInput;
+	    food_left_dynamic=numBallsInput;
 	    lblBalls.value=numBallsInput;
 		startGameHandler();
 		return false;
@@ -394,6 +395,14 @@ function findRandomEmptyCell(board) {
 }
 
 function newGameHandler(){
+    randScoreX=-1;
+    randScoreY=-1;
+    randScorePrev=0;
+    //maxScore=0;
+    lives=5;
+    clock=0;
+    direction='right';
+    movingPoints = false;
     pageHandler('#settings');
     $("#up-key").val("");
 	$("#down-key").val("");
@@ -408,6 +417,7 @@ function newGameHandler(){
 }
 
 function PacmanMeetGhost(){
+    window.alert(food_left_dynamic);
     score=score-10;
     lives=lives-1;
     if(lives>0){
@@ -991,7 +1001,7 @@ function sleep(ms) {
 
 
 async function Draw() {
-    if(time_elapsed<Number(gameTime)+Number(clock)){ //קביעת זמן עבור כל המשחק
+    if(time_elapsed<Number(gameTime)+Number(clock) ){ //קביעת זמן עבור כל המשחק
         if(clock==20){lblTime.value = time_elapsed.toString()+" +20 (For Clock Eat)";}//הוספת שעון שמגדיל את זמן המשחק
         else{lblTime.value=time_elapsed;}
         lblLives.value=lives;
@@ -1140,7 +1150,18 @@ async function Draw() {
         
 	}
 }
+function check_food(){
+    no_food_left=true;
+    for (var i = 0; i < 20; i++) {
+        for(var j=0;j<20;j++){
+            if(board[i][j]==1 || board[i][j]==5 || board[i][j]==10){
+                no_food_left=false;
+            }
+        }
+    }
+    if(no_food_left){food_left_dynamic=0;}
 
+}
 function UpdatePosition() {
 	board[shape.i][shape.j] = 0;
 	var x = GetKeyPressed();
@@ -1168,12 +1189,24 @@ function UpdatePosition() {
 	}
 	if (board[shape.i][shape.j] == 1) {
 		score=score+5;//כל "אכילה" של כדור מעלה את ניקוד המשחק בהתאם לסוגו
+		food_left_dynamic--;
+        if(food_left_dynamic==1){
+            check_food();
+        }
 	}
 	if (board[shape.i][shape.j] == 5) {
         score=score+15;//כל אכילה של כדור מעלה את ניקוד המשחק בהתאם לסוגו
+        food_left_dynamic--;
+        if(food_left_dynamic==1){
+            check_food();
+        }
     }
     if (board[shape.i][shape.j] == 10) {
         score=score+25;
+        food_left_dynamic--;
+        if(food_left_dynamic==1){
+            check_food();
+        }
     }
     if(board[shape.i][shape.j] == 15){
         PacmanMeetGhost();
@@ -1197,7 +1230,7 @@ function UpdatePosition() {
 	if (score >= 20 && time_elapsed <= 10) {
 		pac_color = "green";
 	}
-	if (score == maxScore) {
+	if (food_left_dynamic<=0) {
 	    Draw();
 	    lblScore.value = score;
         // Call Stop() instead
