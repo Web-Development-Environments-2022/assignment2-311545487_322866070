@@ -172,6 +172,16 @@ body {
     padding: 0;
     margin: 0;
   }
+
+  h4 {
+    color: rgb(69, 69, 69); 
+    font-family: 'Destroy', sans-serif;
+    font-size: 18px; 
+    line-height: 1.5;
+    align-items:left;
+    text-align:left;
+    font-weight:bold;
+  }
 /* 
   #arrow-img {
     width: 55px;
@@ -340,3 +350,4 @@ body {
     height: auto;
     width: auto;
   }
+

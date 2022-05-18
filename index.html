@@ -30,9 +30,7 @@
 			  <a id="menu_welcome" onclick="pageHandler('#welcome');">Welcome</a>
 			  <a id="menu_signup" onclick="pageHandler('#signup');">Signup</a>
 			  <a id="menu_login" onclick="pageHandler('#login');">Login</a>
-			  <!-- <a href="#Settings" class="expandHome">Settings</a> -->
 			  <a id="aboutBtn" >About</a>
-			  <!-- <a href="#PlayGame" class="expandHome">Play Game</a> -->
 			</div>
 		</nav>
 		
@@ -57,12 +55,12 @@
 				<!-- BUTTONS FOR TESTING ONLY -->
 				<hr>
 				<hr>
-				<h1>BUTTONS FOR TESTING ONLY</h1>
-				<h1>DELETE BEFORE SUBMISSION</h1>
+				<h1>BUTTONS FOR TESTING ONLY
+				DELETE BEFORE SUBMISSION</h1>
 			<p>
 				<br><button id="settings-btn" class="btns" align="center" onclick="pageHandler('#settings');">Settings</button> 
-				<br>
-				<br><button id="game-btn" class="btns" align="center" onclick="startGameHandler();">Game</button>
+				<!-- <br> -->
+				<!-- <br><button id="game-btn" class="btns" align="center" onclick="startGameHandler();">Game</button> -->
 			</p>
 			
 		</section>
@@ -72,15 +70,10 @@
 				<h1>Signup</h1>
 				<hr> 
 				<form class="signup-class" id="signup-form" align="center">
-					<!-- <p><label for="uname">Username:</label> -->
 					<input type="text" id="uname" name="uname" placeholder="Username"></p>
-					<!-- <p><label for="password">Password:</label> -->
 					<input type="password" id="password" name="password" placeholder="Password"></p>
-					<!-- <p><label for="fname">First Name:</label> -->
 					<input type="text" id="fname" name="fname" placeholder="First Name"></p>
-					<!-- <p><label for="lname">Last Name:</label> -->
 					<input type="text" id="lname" name="lname" placeholder="Last Name"></p>
-					<!-- <p><label for="email">Email:</label> -->
 					<input type="text" id="email" name="email" placeholder="Email"></p>
 					<p><label for="day">Date of Birth:</label><br>
 					<select name="day" id="day">
@@ -413,6 +406,9 @@
 				<div>
 					<button id='settingRandom' class="btns" type="text" onclick="randomSetting();" >Random</button>
 					<button id='setting' class="btns" type="submit" onclick="settingValidator();">Let's Play</button>
+					<br>
+					<br>
+					<br>
 				</div>
 				
 			</div>
@@ -473,8 +469,6 @@
 
 
 		<section id="game-section" class="login-class" align="center">
-			<h1>Welcome to PacMan: Hungry Chrome</h1>
-			<hr> 
 			<div id="stats">
 
 				<p>Game Progress:</p>
@@ -484,46 +478,49 @@
 				<input id="lblTime" type="text" />
 				<label for="lblLives">LIVES:</label>
 				<input id="lblLives" type="text" /></h2>
-				<p></p>
-				<div id="score">
-
-				</div>
-				<div id="time">
-
-				</div>
-				<div id="lives">
-
-				</div>
-				</div>
-			<p>Settings:</p>
-			<label for="lblUp">UP:</label>
-			<input id="lblUp" type="text" value="ArrowUp" readonly="true"/></h2>
-			<label for="lblDown">DOWN:</label>
-			<input id="lblDown" type="text" value="ArrowDown" readonly="true"/></h2>
-			<label for="lblLeft">LEFT:</label>
-			<input id="lblLeft" type="text" value="ArrowLeft" readonly="true"/></h2>
-			<label for="lblRight">RIGHT:</label>
-			<input id="lblRight" type="text" value="ArrowRight" readonly="true"/></h2>
-			<p></p>
-			<label for="lblBalls">BALLS NUMBER:</label>
-			<input id="lblBalls" type="text" value="50" readonly="true"/></h2>
-			<label for="lblGameTime">GAME TIME:</label>
-			<input id="lblGameTime" type="text" value="60" readonly="true"/></h2>
-			<label for="lblGhosts">GHOSTS NUMBER:</label>
-			<input id="lblGhosts" type="text" value="4" readonly="true"/></h2>
-			<p></p>
-			<label for="lblColor">5 COLOR:</label>
-			<input id="lblColor" type="color" disabled /></h2>
-			<label for="lblColor2">15 COLOR:</label>
-			<input id="lblColor2" type="color" disabled /></h2>
-			<label for="lblColor3">25 COLOR:</label>
-			<input id="lblColor3" type="color" disabled /></h2>
-			<div id="game">
-				<canvas id="canvas" height="600" width="600" ></canvas>
+				
+				<!-- <p></p>
+				<div id="score"></div>
+				<div id="time"></div>
+				<div id="lives"></div> -->
 			</div>
+			<hr> 
+			<table id="game-table" align="center">
+				<tr>
+					<th id="settings-col" >
+						<h3>Settings:</h3>
+						<h4><label for="lblUp">UP:</label>
+						<input id="lblUp" type="text" value="ArrowUp" readonly="true" style="width: 75px;"/>
+						<br><label for="lblDown">DOWN:</label>
+						<input id="lblDown" type="text" value="ArrowDown" readonly="true" style="width: 75px;"/>
+						<br><label for="lblLeft">LEFT:</label>
+						<input id="lblLeft" type="text" value="ArrowLeft" readonly="true" style="width: 75px;"/>
+						<br><label for="lblRight">RIGHT:</label>
+						<input id="lblRight" type="text" value="ArrowRight" readonly="true" style="width: 75px;"/>
+						<br><label for="lblBalls">BALLS NUMBER:</label>
+						<input id="lblBalls" type="text" value="50" readonly="true" style="width: 50px;"/>
+						<br><label for="lblGameTime">GAME TIME:</label>
+						<input id="lblGameTime" type="text" value="60" readonly="true" style="width: 50px;"/>
+						<br><label for="lblGhosts">GHOSTS NUMBER:</label>
+						<input id="lblGhosts" type="text" value="4" readonly="true" style="width: 50px;"/>
+						<br><label for="lblColor">5 COLOR:</label>
+						<input id="lblColor" type="color" disabled />
+						<br><label for="lblColor2">15 COLOR:</label>
+						<input id="lblColor2" type="color" disabled />
+						<br><label for="lblColor3">25 COLOR:</label>
+						<input id="lblColor3" type="color" disabled /></h4>
+						<br>
+						<br><button id='new_game' class="btns" type="submit" align="center" onclick="pageHandler('#settings');">New Game</button>
+						<button id='song-ctrl' class="btns" align="center" onclick="pauseMusic();">Pause Song</button>
+					</th>
+					<th id="game-col" align="center">
+						<div id="game">
+							<canvas id="canvas" height="600" width="600" ></canvas>
+						</div>
+					</th>
+				</tr>
+			</table>
 			<br>
-			<br><button id='new_game' class="btns" type="submit" align="center" onclick="pageHandler('#settings');">New Game</button>
-			<button id='song-ctrl' class="btns" align="center" onclick="pauseMusic();">Pause Song</button>
 		</section> 
 
 		<footer id="footer" align="center">
