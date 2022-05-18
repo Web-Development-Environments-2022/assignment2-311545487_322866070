@@ -417,7 +417,6 @@ function newGameHandler(){
 }
 
 function PacmanMeetGhost(){
-    window.alert(food_left_dynamic);
     score=score-10;
     lives=lives-1;
     if(lives>0){
