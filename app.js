@@ -117,6 +117,10 @@ const hide = () => {
 		song.currentTime = 0;
         Stop();
 		gameOn = false;
+        ghostsLocs={};
+        ghostsCounter=0;
+        lives=5;
+        maxScore=0;
 	}
   };
 
@@ -179,7 +183,7 @@ function settingValidator(){
 	    validSetting=false;
 	}
 	if(!validSetting){
-		window.alert("Invalid Setting!");
+		window.alert("Invalid Settings!");
 		return false;
 	}
 	else{
@@ -375,6 +379,7 @@ function Start() {
 const Stop = () => {
 	window.clearInterval(interval);
 	window.clearInterval(intervalGhosts);
+
   };
   
 
@@ -388,6 +393,19 @@ function findRandomEmptyCell(board) {
 	return [i, j];
 }
 
+function newGameHandler(){
+    pageHandler('#settings');
+    $("#up-key").val("");
+	$("#down-key").val("");
+	$("#left-key").val("");
+	$("#right-key").val("");
+    $("#num-balls-id").val("");
+	$("#small-ball-color").val("");
+	$("#medium-ball-color").val("");
+	$("#big-ball-color").val("");
+	$("#play-time").val("");
+	$("#num-ghosts").val("");
+}
 
 function PacmanMeetGhost(){
     score=score-10;
