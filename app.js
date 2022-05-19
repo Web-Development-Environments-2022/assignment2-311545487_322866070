@@ -185,7 +185,7 @@ function settingValidator(){
 	if(rightKeyInput=='' || rightKeyInput==downKeyInput || rightKeyInput==upKeyInput || rightKeyInput==leftKeyInput){
 		validSetting = false;
 	}
-	if(playTimeInput < 60 || playTimeInput == null || isLetter != null){
+	if(playTimeInput < 60 || playTimeInput > 600 || playTimeInput == null || isLetter != null){
 		validSetting = false;
 	}
 	if(numBallsInput<50 || numBallsInput>90){
@@ -221,7 +221,7 @@ function randomSetting(){
     randSmallBallColor = "#" + Math.floor(Math.random()*16777215).toString(16);
     randMediumBallColor = "#" + Math.floor(Math.random()*16777215).toString(16);//randomColor();
     randBigBallColor = "#" + Math.floor(Math.random()*16777215).toString(16); //randomColor();
-    randPlayTime = Math.floor(Math.random() * 600) + 60;
+    randPlayTime = Math.floor(Math.random() * 540) + 60;
     randNumGhosts = Math.floor(Math.random() * 4) + 1;
 	$("#up-key").val("ArrowUp");
 	$("#down-key").val("ArrowDown");

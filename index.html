@@ -363,43 +363,43 @@
 			<form id="settings-form" name="settingsForm" align="center" autocomplete="off">
 				<p>
 					Up Key:
-					<input id="up-key" name="upKey" type="text" onkeydown="upKeyListener(event)" maxlength="1" placeholder="Up Key">
+					<input id="up-key" name="upKey" type="text" required onkeydown="upKeyListener(event)" maxlength="1" placeholder="Up Key">
 				</p>
 				<p>
 					Down Key:
-					<input id="down-key" name="downKey" type="text" onkeydown="downKeyListener(event)" maxlength="1" placeholder="Down Key">
+					<input id="down-key" name="downKey" type="text" required onkeydown="downKeyListener(event)" maxlength="1" placeholder="Down Key">
 				</p>
 				<p>
 					Left Key:
-					<input id="left-key" name="leftKey" type="text" onkeydown="leftKeyListener(event)" maxlength="1" placeholder="Left Key">
+					<input id="left-key" name="leftKey" type="text" required onkeydown="leftKeyListener(event)" maxlength="1" placeholder="Left Key">
 				</p>
 				<p>
 					Right Key:
-					<input id="right-key" name="rightKey"type="text" onkeydown="rightKeyListener(event)" maxlength="1" placeholder="Right Key">
+					<input id="right-key" name="rightKey"type="text" required onkeydown="rightKeyListener(event)" maxlength="1" placeholder="Right Key">
 				</p>
 				<p>
 					Number of Balls:
-					<input id="num-balls-id" name="num-balls" type="number" min="50" max="90" value="50">
+					<input id="num-balls-id" name="num-balls" type="number" required min="50" max="90" value="50">
 				</p>
 				<p>
 					5 Points Ball Color:
-					<input id="small-ball-color" class ="settings-color" name="small-ball-color" type="color">
+					<input id="small-ball-color" class ="settings-color" required name="small-ball-color" type="color" >
 				</p>
 				<p>
 					15 Points Ball Color:
-					<input id="medium-ball-color" class ="settings-color" name="medium-ball-color" type="color">
+					<input id="medium-ball-color" class ="settings-color" required name="medium-ball-color" type="color">
 				</p>
 				<p>
 					25 Points Ball Color:
-					<input id="big-ball-color" class ="settings-color" name="big-ball-color" type="color">
+					<input id="big-ball-color" class ="settings-color" required name="big-ball-color" type="color">
 				</p>
 				<p>
 					Time to play (in seconds):
-					<input id="play-time" name="play-time" min="60" max="600" placeholder="Minimum of 60 seconds" value="60">
+					<input id="play-time" name="play-time" required min="60" max="600" placeholder="Minimum of 60 seconds" value="60" >
 				</p>
 				<p>
 					Number of Ghosts:
-					<input id="num-ghosts" name="num-ghosts" type="number" value = "1" min="1" max="4" >
+					<input id="num-ghosts" name="num-ghosts" required type="number" value = "1" min="1" max="4">
 				</p>
 			</form>
 			<div class="settingButton"  align="center">
