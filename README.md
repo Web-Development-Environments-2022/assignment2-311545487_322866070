@@ -4,16 +4,14 @@ Link: https://web-development-environments-2022.github.io/assignment2-311545487_
 # Personal Information
 * Name: Yonatan Abeksis
 * ID: 311545487
-* Github username: abeksis93
-__
-__
+* Github username: abeksis93 </br>
 
 * Name: Shahar Cohen
 * ID: 322866070
 * Github username: shahardc
 
 # PacMan: Hungry Chrome
-### Functionality:
+## Functionality:
 
 * PacMan has a spacial design ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/chrome_pacman_1_r.png?raw=true)
 
