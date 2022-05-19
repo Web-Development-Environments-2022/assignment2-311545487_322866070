@@ -309,6 +309,15 @@
 					}
 					if(valid & passValid & names){
 						users[uname.val()]=password.val();
+						$("#uname").val("");
+						$("#password").val("");
+						$("#fname").val("");
+						$("#lname").val("");
+						$("#uname").val("");
+						$("#email").val("");
+						$("#day").val("1");
+						$("#month").val("Jan");
+						$("#year").val("j1900j");
 						pageHandler('#settings');
 					}
 				});
@@ -342,6 +351,8 @@
 					}
 					if(valid){
 						alert(`Welcome back ${uname.val()}!\nYou will be directed automatically to the settings page.`);
+						$("#uname2").val("");
+						$("#password2").val("");
 						pageHandler('#settings');
 					}
 					else{

@@ -316,11 +316,11 @@ function Start() {
 					    board[i][j] = 1;
 					    maxScore=maxScore+5;
 					}
-					if(randomColor>0.6 & randomColor<0.9){ //green- 15 pts
+					if(randomColor>=0.6 & randomColor<0.9){ //green- 15 pts
 					    board[i][j] = 5;
 					    maxScore=maxScore+15;
 					}
-					if(randomColor>0.9){ //blue- 25 pts
+					if(randomColor>=0.9){ //blue- 25 pts
 					    board[i][j] = 10;
 					    maxScore=maxScore+25;
 					}
