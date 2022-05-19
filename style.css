@@ -102,6 +102,11 @@ body {
     padding:3em 5em 3em 5em;
   }
 
+  section.hidden
+  {
+    display: none
+  }
+
   #menu-class{
     overflow: hidden;
   }
@@ -136,10 +141,10 @@ body {
     background: rgb(47, 47, 47);
     background-clip: text;
     -webkit-background-clip: text;
-    font-family: Verdana, sans-serif;
+    /* font-family: Verdana, sans-serif; */
     /* font-family: 'Comic Sans MS', 'Comic Sans', 'cursive'; */
     /* font-family: 'Calibri', sans-serif;  */
-    /* font-family: 'FFF Tusj', sans-serif; */
+    font-family: 'myFont', sans-serif;
     font-size: 28px; 
     line-height: 1.5;
     align-items:center;

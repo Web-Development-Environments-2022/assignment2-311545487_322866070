@@ -5,6 +5,7 @@
 		<title>PacMan: Hungry Chrome</title>
 		<link rel="stylesheet" href="./style.css">
 		<link href="http://fonts.cdnfonts.com/css/destroy" rel="stylesheet">
+		<link rel="icon" href="pics/chrome_pacman_1_r.png">
 		<!-- <link href="http://fonts.cdnfonts.com/css/fff-tusj" rel="stylesheet"> -->
 		<!-- <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script> -->
 		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/additional-methods.js"></script> -->
@@ -53,18 +54,17 @@
 				<button id="signup-btn" class="btns" align="center" onclick="pageHandler('#signup');">Signup</button>
 			</p>
 				<!-- BUTTONS FOR TESTING ONLY -->
-				<hr>
+				<!-- <hr>
 				<hr>
 				<h1>BUTTONS FOR TESTING ONLY
-				DELETE BEFORE SUBMISSION</h1>
-			<p>
-				<br><button id="settings-btn" class="btns" align="center" onclick="pageHandler('#settings');">Settings</button> 
+				DELETE BEFORE SUBMISSION</h1> -->
+				<!-- <br><button id="settings-btn" class="btns" align="center" onclick="pageHandler('#settings');">Settings</button>  -->
 				<!-- <br> -->
 				<!-- <br><button id="game-btn" class="btns" align="center" onclick="startGameHandler();">Game</button> -->
-			</p>
+
 			
 		</section>
-		<section id="signup">
+		<section id="signup" class="hidden">
 			<!-- SIGNUP PAGE -->
 			<div>
 				<h1>Signup</h1>
@@ -315,7 +315,7 @@
 				</script>
 			</div>
 		</section>
-		<section id="login" class="login-class">
+		<section id="login" class="hidden">
 			<!-- LOGIN PAGE -->
 			<div >
 				<h1>Login</h1>
@@ -356,7 +356,7 @@
 		</section>
 
 		<!-- SETTINGS PAGE -->
-		<section id="settings" class="settings-class">
+		<section id="settings" class="hidden">
 		<div>
 			<h1>Select Your Setting</h1>
 			<hr> 
@@ -399,7 +399,7 @@
 				</p>
 				<p>
 					Number of Ghosts:
-					<input id="num-ghosts" name="num-ghosts" type="number" value = "1" min="0" max="4" >
+					<input id="num-ghosts" name="num-ghosts" type="number" value = "1" min="1" max="4" >
 				</p>
 			</form>
 			<div class="settingButton"  align="center">
@@ -468,7 +468,7 @@
 		</script>
 
 
-		<section id="game-section" class="login-class" align="center">
+		<section id="game-section" class="hidden" align="center">
 			<div id="stats">
 
 				<h3>Game Progress:</h3>
