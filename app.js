@@ -378,7 +378,20 @@ function Start() {
 	interval = setInterval(UpdatePosition, 200);
 	intervalGhosts=setInterval(GhostsMove2, 1500);
 	gameOn = true;
+    if(!winnerSong.paused){
+        winnerSong.pause();
+        winnerSong.currentTime = 0;
+    }
+    if(!loserSong.paused){
+        loserSong.pause();
+        loserSong.currentTime = 0;
+    }
+    if(!doBetterSong.paused){
+        doBetterSong.pause();
+        doBetterSong.currentTime = 0;
+    }
 	song.play();
+    $('#song-ctrl').text("Pause Song");
 }
 
 const Stop = () => {
