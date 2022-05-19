@@ -1,3 +1,22 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=7785877&assignment_repo_type=AssignmentRepo)
-# Assignment2
- 
+## Web Development Environments 2022 - Assignment 2 ##
+Link: https://web-development-environments-2022.github.io/assignment2-311545487_322866070/
+
+## Personal Information ##
+* Name: Yonatan Abeksis
+* ID: 311545487
+* Github username: abeksis93
+
+* Name: Shahar Cohen
+* ID: 322866070
+* Github username: shahardc
+
+## PacMan: Hungry Chrome ##
+	Functionality:
+	-PacMan has a spacial design ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/chrome_pacman_1_r.png?raw=true)
+	-Ghosts have a spacial design ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/ghost_firefox_1.png?raw=true) ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/ghost_edge_1.png?raw=true) ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/ghost_opera_1.png?raw=true) ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/ghost_safari_1.png?raw=true)
+	-Moving points spacial design ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/candy_ram_1.png?raw=true)
+	-Extra Life -> Eat the heart to get an Extra Life ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/extra_life.png?raw=true)
+	-Double Extra Life -> Eat the heart to get an Double Extra Life ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/double_extra_life.png?raw=true)
+	-Extra Time -> Eat the Clock to get an additional 20 seconds ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/clock.png?raw=true)
+	-Background music can be paused during the game. 
+	-Music will be played according the result (Win\Lose\Timeup less 100 points)
