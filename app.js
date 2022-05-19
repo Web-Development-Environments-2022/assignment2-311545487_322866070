@@ -781,14 +781,18 @@ async function Draw() {
                         board[i][j]=0;
                     }
                 } else if (board[i][j] == 31) { //ציור הניקוד הזז
-                    if(movingPoints==false){
-                         context.beginPath();
-                         context.drawImage(movingPointsIcon, center.x - 12, center.y - 12);
+                    if(i==randScoreX && j==randScoreY){
+                        if(movingPoints==false){
+                             context.beginPath();
+                             context.drawImage(movingPointsIcon, center.x - 12, center.y - 12);
+                        }
+                        else{
+                            board[i][j]=0;
+                        }
                     }
                     else{
                         board[i][j]=0;
                     }
-
                 } else if (board[i][j] == 1) { // small ball - 5 pts
                     context.beginPath();
                     context.arc(center.x, center.y, 7.5, 0, 2 * Math.PI); // black circle- 5 pts
