@@ -2,13 +2,9 @@
 Link: https://web-development-environments-2022.github.io/assignment2-311545487_322866070/
 
 # Personal Information
-* Name: Yonatan Abeksis
-* ID: 311545487
-* Github username: abeksis93 </br>
+* Name: Yonatan Abeksis, ID: 311545487, Github username: abeksis93
 
-* Name: Shahar Cohen
-* ID: 322866070
-* Github username: shahardc
+* Name: Shahar Cohen, ID: 322866070, Github username: shahardc
 
 # PacMan: Hungry Chrome
 ## Functionality:
@@ -19,11 +15,11 @@ Link: https://web-development-environments-2022.github.io/assignment2-311545487_
 
 * Moving points spacial design ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/candy_ram_1.png?raw=true)
 
-* Extra Life -> Eat the heart to get an Extra Life ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/extra_life.png?raw=true)
+* Extra Life: Eat the heart to get an Extra Life ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/extra_life.png?raw=true)
 
-* Double Extra Life -> Eat the heart to get an Double Extra Life ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/double_extra_life.png?raw=true)
+* Double Extra Life: Eat the heart to get an Double Extra Life ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/double_extra_life.png?raw=true)
 
-* Extra Time -> Eat the Clock to get an additional 20 seconds ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/clock.png?raw=true)
+* Extra Time: Eat the Clock to get an additional 20 seconds ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/clock.png?raw=true)
 
 * Background music can be paused during the game. 
 
