@@ -121,25 +121,12 @@ const hide = () => {
 	$('#login').hide();
 	$('#settings').hide();
 	$('#game-section').hide();
-	// $('#about').hide();
 	if(gameOn){
         if(!song.paused){
             song.pause();
             song.currentTime = 0;
 
         }
-		// if(!winnerSong.paused){
-        //     winnerSong.pause();
-        // }
-        // if(!loserSong.paused){
-        //     loserSong.pause();
-        // }
-        // if(!doBetterSong.paused){
-        //     doBetterSong.pause();
-        // }
-        // winnerSong.currentTime = 0;
-        // loserSong.currentTime = 0;
-        // doBetterSong.currentTime = 0;
         Stop();
 		gameOn = false;
         ghostsLocs={};
@@ -228,12 +215,6 @@ function settingValidator(){
 	}
 }
 
-// const randomColor = () => {
-// 	let randColorNum = Math.floor(Math.random()*16777215).toString(16);
-// 	let colorVal = "#" + randColorNum; 
-// 	return colorVal;
-// }
-
 function randomSetting(){
     randNumBalls = Math.floor(Math.random() * 40) + 50;
     // randSmallBallColor = randomColor();
@@ -309,7 +290,6 @@ function Start() {
 	start_time = new Date();
 	for (var i = 0; i < 20; i++) {
 		board[i] = new Array();
-		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
 		for (var j = 0; j < 20; j++) {
 		    if (
                 (i == 0 && j == 0) ||
@@ -367,7 +347,6 @@ function Start() {
             board[emptyCell[0]][emptyCell[1]] = 10;
             maxScore=maxScore+25;
         }
-		//board[emptyCell[0]][emptyCell[1]] = 1;
 		food_remain--;
 	}
     putPacmanRandomly();//my pacman draw
@@ -452,9 +431,6 @@ function PacmanMeetGhost(){
     else{
         Draw();
         lblScore.value = score;
-        // Call Stop() instead
-        // window.clearInterval(interval);
-        // window.clearInterval(intervalGhosts);
         Stop();
         if(!song.paused){
             song.pause();
@@ -594,19 +570,11 @@ function GhostsMove2(){
     for (var i=0; i<ghostsCounter; i++){
         ghostX=ghostsLocs[i][0];
         ghostY=ghostsLocs[i][1];
-        //window.alert([shape.i,shape.j]);
         neighbors=ghostNeighbors(ghostX,ghostY);
-        //distString=neighbors[0][0].toString()+","+neighbors[0][1].toString()+","+shape.i.toString()+","+shape.j.toString();
         distString=neighbors[0][1].toString()+","+neighbors[0][0].toString()+","+shape.j.toString()+","+shape.i.toString();
         bestDistance=distances[distString]
         bestNeighbor=neighbors[0];
         for (var k=1; k<neighbors.length;k++){
-            //distString=neighbors[k][0].toString()+","+neighbors[k][1].toString()+","+shape.i.toString()+","+shape.j.toString();
-            /*if(board[neighbors[k][1]][neighbors[k][0]]==2){
-                neighborDistance=0;
-                bestNeighbor=neighbors[k];
-                break;
-            }*/
             distString=neighbors[k][1].toString()+","+neighbors[k][0].toString()+","+shape.j.toString()+","+shape.i.toString();
             neighborDistance=distances[distString];
             if(neighborDistance<bestDistance){
@@ -859,9 +827,6 @@ async function Draw() {
 	else{
 	    lblTime.value=Number(gameTime)+Number(clock);//קביעת זמן עבור כל המשחק, הוספת שעון שמגדיל את זמן המשחק
         await sleep(1);//קביעת זמן עבור כל המשחק
-	    // Call Stop() instead
-        // window.clearInterval(interval);
-	    // window.clearInterval(intervalGhosts);
         Stop();
         if(!song.paused){
             song.pause();
@@ -870,7 +835,6 @@ async function Draw() {
         if(score < 100){
             doBetterSong.currentTime = 0;
             doBetterSong.play();
-            // doBetterSong.play();
             setTimeout(function(){
                 alert("You are better than " + score + " points!");
                 newGameHandler();
@@ -971,9 +935,6 @@ function UpdatePosition() {
 	if (food_left_dynamic<=0) {
 	    Draw();
 	    lblScore.value = score;
-        // Call Stop() instead
-		// window.clearInterval(interval);
-		// window.clearInterval(intervalGhosts);
         Stop();
         if(!song.paused){
             song.pause();
