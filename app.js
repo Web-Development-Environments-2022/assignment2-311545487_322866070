@@ -47,6 +47,13 @@ let movementSettings=[38,40,37,39];
 let numBalls=50;
 let gameTime=60;
 
+let intervalTime = 300;
+let intervalGhostsTime = 1750;
+
+let timeEatMedicine = 0;
+let eatMedicine = false;
+let randomNumMedicine;
+
 let gameOn = false;
 let song = new Audio('sound/cottoneyejo.mp3');
 let winnerSong = new Audio('sound/winner_sound.mp3');
@@ -350,6 +357,8 @@ function Start() {
 		food_remain--;
 	}
     putPacmanRandomly();//my pacman draw
+    var emptyCell = findRandomEmptyCell(board);
+	board[emptyCell[0]][emptyCell[1]] = 11;//הוספת תרופה.
 	var emptyCell = findRandomEmptyCell(board);
 	board[emptyCell[0]][emptyCell[1]] = 20;//הוספת שעון שמגדיל את זמן המשחק.
 	var emptyCell = findRandomEmptyCell(board);
@@ -375,8 +384,8 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 200);
-	intervalGhosts=setInterval(GhostsMove2, 1500);
+	interval = setInterval(UpdatePosition, 300); // pacman speed
+	intervalGhosts=setInterval(GhostsMove2, 1750); // ghosts speed
 	gameOn = true;
     if(!winnerSong.paused){
         winnerSong.pause();
@@ -421,6 +430,7 @@ function newGameHandler(){
     direction='right';
     movingPoints = false;
     song.currentTime = 0;
+    lblMedicine.value = 20;
     pageHandler('#settings');
     $("#up-key").val("");
 	$("#down-key").val("");
@@ -563,7 +573,7 @@ function randomScoreMove(){
     previous=randScorePrev;
     if(FutureX<20 && board[FutureX][FutureY]!=15 && board[FutureX][FutureY]!=4){
         if(board[FutureX][FutureY]==2){
-            PacmanMeetRandScore();
+            PacmanMeetRandScore(); // אין פונקציה כזאת
         }
         else{
             if(previous==2){randScorePrev=0;}
@@ -626,6 +636,7 @@ const loadImgs = () => {
     loadClockImg();
     loadMedicineImg();
     extraLifeImgs();
+    loadMedicineImg();
 };
 
 const extraLifeImgs = () => {
@@ -821,6 +832,9 @@ async function Draw() {
                     context.arc(center.x, center.y, 12.5, 0, 2 * Math.PI); // blue circle- 25 pts
                     context.fillStyle = bigBallColor; //color
                     context.fill();
+                } else if (board[i][j] == 11){ // Medicine
+                    context.beginPath();
+                    context.drawImage(medicineIcon, center.x - 13, center.y - 13);
                 } else if (board[i][j] == 20) { // clock
                     context.beginPath();
                     context.drawImage(clockIcon, center.x - 13, center.y - 13); // clock
@@ -838,6 +852,7 @@ async function Draw() {
                     context.beginPath();
                     context.drawImage(doubleExtraLifeIcon, center.x - 13, center.y - 13);
                 }
+
             }
         }
 	}
@@ -881,6 +896,24 @@ function check_food(){
     if(no_food_left){food_left_dynamic=0;}
 
 }
+
+
+// function eatMedicine(){
+//     var randomNum = Math.random();
+//     if(randomNum <= 0.5){
+//         setTimeout(function(){ 
+//             interval = setInterval(UpdatePosition, 150); // pacman speed
+//         }, 10000);
+//         interval = setInterval(UpdatePosition, 200);
+//     } else {
+//         setTimeout(function(){ 
+//             intervalGhosts=setInterval(GhostsMove2, 1000); // ghosts speed
+//         }, 10000);
+//         intervalGhosts=setInterval(GhostsMove2, 1500);
+//     }
+// }
+
+
 function UpdatePosition() {
 	board[shape.i][shape.j] = 0;
 	var x = GetKeyPressed();
@@ -945,10 +978,56 @@ function UpdatePosition() {
     if(board[shape.i][shape.j] == 30){
         lives=lives+2;
     }
+    if(board[shape.i][shape.j]==11){
+        // eatMedicine();
+        eatMedicine = true;
+        randomNumMedicine = Math.random();
+        timeEatMedicine = time_elapsed + 20;
+        if(randomNumMedicine <= 0.5){
+            // intervalTime = 100;
+            window.clearInterval(interval);
+            interval = setInterval(UpdatePosition, 100); // pacman speed
+            console.log("pacman speed");
+        } else {
+            // intervalGhostsTime = 1000;
+            window.clearInterval(intervalGhosts);
+            intervalGhosts=setInterval(GhostsMove2, 600); // ghosts speed
+            console.log("ghosts speed");
+        }
+    }
 	board[shape.i][shape.j] = 2;
 	if (score >= 20 && time_elapsed <= 10) {
 		pac_color = "green";
 	}
+    // var currentTime2 = new Date();
+    // window.alert(time_elapsed);
+    // window.alert(timeEatMedicine);
+    // window.alert(currentTime2 - timeEatMedicine);
+    if(eatMedicine == true ){
+        // window.alert("here");
+        if(timeEatMedicine != 0 && timeEatMedicine <= time_elapsed){
+            if(randomNumMedicine <= 0.5){
+                // intervalTime = 300;
+                window.clearInterval(interval);  
+                interval = setInterval(UpdatePosition, 300);
+                // window.alert("pacman speed normal");
+                console.log("pacman speed normal");
+            } else {
+                // intervalGhostsTime = 1750;
+                window.clearInterval(intervalGhosts);
+                intervalGhosts = setInterval(GhostsMove2, 1750);
+                // window.alert("ghosts speed normal");
+                console.log("ghosts speed normal");
+            }
+            eatMedicine = false;
+            lblMedicine.value = 0;
+        }
+        else
+        {
+            lblMedicine.value = timeEatMedicine-time_elapsed;
+        }
+    }
+    
 	if (food_left_dynamic<=0) {
 	    Draw();
 	    lblScore.value = score;
