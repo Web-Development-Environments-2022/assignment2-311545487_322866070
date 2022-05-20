@@ -1,5 +1,5 @@
-var randScoreX=-1;
-var randScoreY=-1;
+var randScoreX=9;
+var randScoreY=9;
 var randScorePrev=0;
 var context;
 var shape = new Object();
@@ -277,6 +277,7 @@ const startGameHandler = () => {
 }
 
 function Start() {
+    movingPoints=false;
 	board = new Array();
 	score = 0;
 	pac_color = "yellow";
@@ -285,47 +286,57 @@ function Start() {
 	var pacman_remain = 1;
     loadImgs();
 	start_time = new Date();
+	//for(var i=0; i<20; i++){}
+	//board[9][9]=31;
+	//window.alert(board);
 	for (var i = 0; i < 20; i++) {
-		board[i] = new Array();
+	    board[i] = new Array();
 		for (var j = 0; j < 20; j++) {
-		    if (
-                (i == 0 && j == 0) ||
-                (i == 19 && j == 0) ||
-                (i == 0 && j == 19) ||
-                (i == 19 && j == 19)
-            ) {
-                if(ghostsLimit>0){
-                    board[i][j] = 15;//ghosts
-                    ghostsLocs[ghostsCounter]=[i,j,0];
-                    ghostsCounter++;
-                    ghostsLimit--;
+		    if(i==9 && j==9){
+		        board[i][j]=31;
+		        randScoreX=9;
+		        randScoreY=9;
+		    }
+		    else{
+                if (
+                    (i == 0 && j == 0) ||
+                    (i == 19 && j == 0) ||
+                    (i == 0 && j == 19) ||
+                    (i == 19 && j == 19)
+                ) {
+                    if(ghostsLimit>0){
+                        board[i][j] = 15;//ghosts
+                        ghostsLocs[ghostsCounter]=[i,j,0];
+                        ghostsCounter++;
+                        ghostsLimit--;
+                    }
+                }
+                if(maze[j][i]==1)
+                {
+                    board[i][j] = 4;
+                } else if(((i!=0 && i!=19)||(j!=0 && j!=19))&& !(i==9 && j==9)){
+                    var randomNum = Math.random();
+                    if (randomNum <= (1.0 * food_remain) / cnt) {
+                        food_remain--;
+                        randomColor= Math.random();//קביעת צבעים לכדורים
+                        if(randomColor<0.6){ //black- 5 pts
+                            board[i][j] = 1;
+                            maxScore=maxScore+5;
+                        }
+                        if(randomColor>=0.6 & randomColor<0.9){ //green- 15 pts
+                            board[i][j] = 5;
+                            maxScore=maxScore+15;
+                        }
+                        if(randomColor>=0.9){ //blue- 25 pts
+                            board[i][j] = 10;
+                            maxScore=maxScore+25;
+                        }
+                    } else {
+                        board[i][j] = 0;
+                    }
+                    cnt--;
                 }
             }
-			if(maze[j][i]==1)
-			{
-				board[i][j] = 4;
-			} else if((i!=0 && i!=19)||(j!=0 && j!=19)){
-				var randomNum = Math.random();
-				if (randomNum <= (1.0 * food_remain) / cnt) {
-					food_remain--;
-					randomColor= Math.random();//קביעת צבעים לכדורים
-					if(randomColor<0.6){ //black- 5 pts
-					    board[i][j] = 1;
-					    maxScore=maxScore+5;
-					}
-					if(randomColor>=0.6 & randomColor<0.9){ //green- 15 pts
-					    board[i][j] = 5;
-					    maxScore=maxScore+15;
-					}
-					if(randomColor>=0.9){ //blue- 25 pts
-					    board[i][j] = 10;
-					    maxScore=maxScore+25;
-					}
-				} else {
-					board[i][j] = 0;
-				}
-				cnt--;
-			}
 		}
 		
 	}
@@ -355,10 +366,10 @@ function Start() {
     board[emptyCell[0]][emptyCell[1]] = 25;//הוספת "תרופות" תרופה שמגדילה את כמות החיים ב1.
     var emptyCell = findRandomEmptyCell(board);
     board[emptyCell[0]][emptyCell[1]] = 30;//הוספת תרופות תרופה שמגדילה את כמות החיים ב2.
-    var emptyCell = findRandomEmptyCell(board);
-    board[emptyCell[0]][emptyCell[1]] = 31;//הוספת ניקוד זז רנדומלית.
-    randScoreX=emptyCell[0];
-    randScoreY=emptyCell[1];
+    //var emptyCell = findRandomEmptyCell(board);
+    //board[emptyCell[0]][emptyCell[1]] = 31;//הוספת ניקוד זז רנדומלית.
+    //randScoreX=emptyCell[0];
+    //randScoreY=emptyCell[1];
 	keysDown = {};
 	addEventListener(
 		"keydown",
@@ -403,7 +414,7 @@ const Stop = () => {
 function findRandomEmptyCell(board) {
 	var i = Math.floor(Math.random() * 19 + 1);
 	var j = Math.floor(Math.random() * 19 + 1);
-	while (board[i][j] != 0) {
+	while (board[i][j] != 0 ||(i==9 && j==9)) {
 		i = Math.floor(Math.random() * 19 + 1);
 		j = Math.floor(Math.random() * 19 + 1);
 	}
@@ -411,8 +422,8 @@ function findRandomEmptyCell(board) {
 }
 
 function newGameHandler(){
-    randScoreX=-1;
-    randScoreY=-1;
+    randScoreX=9;
+    randScoreY=9;
     randScorePrev=0;
     //maxScore=0;
     lives=5;
@@ -722,7 +733,8 @@ function sleep(ms) {
 
 
 async function Draw() {
-    if(time_elapsed<Number(gameTime)+Number(clock) ){ //קביעת זמן עבור כל המשחק
+    if(time_elapsed<Number(gameTime)+Number(clock) && food_left_dynamic>0){ //קביעת זמן עבור כל המשחק
+        if(food_left_dynamic<=3){check_food();}
         if(clock==20){lblTime.value = time_elapsed.toString()+" +20 (For Clock Eat)";}//הוספת שעון שמגדיל את זמן המשחק
         else{lblTime.value=time_elapsed;}
         lblLives.value=lives;
