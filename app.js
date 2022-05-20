@@ -900,21 +900,6 @@ function check_food(){
 }
 
 
-// function eatMedicine(){
-//     var randomNum = Math.random();
-//     if(randomNum <= 0.5){
-//         setTimeout(function(){ 
-//             interval = setInterval(UpdatePosition, 150); // pacman speed
-//         }, 10000);
-//         interval = setInterval(UpdatePosition, 200);
-//     } else {
-//         setTimeout(function(){ 
-//             intervalGhosts=setInterval(GhostsMove2, 1000); // ghosts speed
-//         }, 10000);
-//         intervalGhosts=setInterval(GhostsMove2, 1500);
-//     }
-// }
-
 
 function UpdatePosition() {
 	board[shape.i][shape.j] = 0;
@@ -981,45 +966,34 @@ function UpdatePosition() {
         lives=lives+2;
     }
     if(board[shape.i][shape.j]==11){
-        // eatMedicine();
         eatMedicine = true;
         randomNumMedicine = Math.random();
         timeEatMedicine = time_elapsed + 20;
         if(randomNumMedicine <= 0.5){
-            // intervalTime = 100;
             window.clearInterval(interval);
             interval = setInterval(UpdatePosition, 100); // pacman speed
-            console.log("pacman speed");
+            // console.log("pacman speed");
         } else {
-            // intervalGhostsTime = 1000;
             window.clearInterval(intervalGhosts);
             intervalGhosts=setInterval(GhostsMove2, 600); // ghosts speed
-            console.log("ghosts speed");
+            // console.log("ghosts speed");
         }
     }
 	board[shape.i][shape.j] = 2;
 	if (score >= 20 && time_elapsed <= 10) {
 		pac_color = "green";
 	}
-    // var currentTime2 = new Date();
-    // window.alert(time_elapsed);
-    // window.alert(timeEatMedicine);
-    // window.alert(currentTime2 - timeEatMedicine);
     if(eatMedicine == true ){
         // window.alert("here");
         if(timeEatMedicine != 0 && timeEatMedicine <= time_elapsed){
             if(randomNumMedicine <= 0.5){
-                // intervalTime = 300;
                 window.clearInterval(interval);  
                 interval = setInterval(UpdatePosition, 300);
-                // window.alert("pacman speed normal");
-                console.log("pacman speed normal");
+                // console.log("pacman speed normal");
             } else {
-                // intervalGhostsTime = 1750;
                 window.clearInterval(intervalGhosts);
                 intervalGhosts = setInterval(GhostsMove2, 1750);
-                // window.alert("ghosts speed normal");
-                console.log("ghosts speed normal");
+                // console.log("ghosts speed normal");
             }
             eatMedicine = false;
             lblMedicine.value = 0;
