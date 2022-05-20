@@ -430,6 +430,8 @@ function newGameHandler(){
     direction='right';
     movingPoints = false;
     song.currentTime = 0;
+    eatMedicine = false;
+    timeEatMedicine = 0;
     lblMedicine.value = 20;
     pageHandler('#settings');
     $("#up-key").val("");
