@@ -78,7 +78,6 @@ let medicineIcon;
 let extraLifeIcon;
 let doubleExtraLifeIcon;
 
-//let numBalls;
 let smallBallColor;
 let mediumBallColor;
 let bigBallColor;
@@ -93,8 +92,6 @@ let randNumGhosts;
 
 let movingPoints = false;
 let food_left_dynamic;
-//let movementSettingsValid=false;
-//let movementSettings=[38,40,37,39];
 
 $(document).ready(function() {
     $("section#signup").removeClass("hidden");
@@ -102,7 +99,6 @@ $(document).ready(function() {
     $("section#settings").removeClass("hidden");
     $("section#game-section").removeClass("hidden");
     welcomePage();
-	// Start();
 });
 
 //change screens:
@@ -167,14 +163,9 @@ function settingValidator(){
 	let bigBallColorInput = document.forms["settings-form"]["big-ball-color"].value;
 	let playTimeInput = document.forms["settings-form"]["play-time"].value;
 	let numGhostsInput = document.forms["settings-form"]["num-ghosts"].value;
-
-//    numBalls = numBallsInput;
     smallBallColor = smallBallColorInput;
     mediumBallColor = mediumBallColorInput;
     bigBallColor = bigBallColorInput;
-    // console.log(smallBallColor);
-    // console.log(mediumBallColor);
-    // console.log(bigBallColor);
 
 
 	let letter = /[a-z,A-Z]/g;
@@ -224,7 +215,6 @@ function settingValidator(){
 
 function randomSetting(){
     randNumBalls = Math.floor(Math.random() * 40) + 50;
-    // randSmallBallColor = randomColor();
     randSmallBallColor = "#" + Math.floor(Math.random()*16777215).toString(16);
     randMediumBallColor = "#" + Math.floor(Math.random()*16777215).toString(16);//randomColor();
     randBigBallColor = "#" + Math.floor(Math.random()*16777215).toString(16); //randomColor();
@@ -575,11 +565,10 @@ function randomScoreMove(){
         FutureX=neighbors[0][0];
         FutureY=neighbors[0][1];
     }
-    //window.alert("got to here");
     previous=randScorePrev;
     if(FutureX<20 && board[FutureX][FutureY]!=15 && board[FutureX][FutureY]!=4){
         if(board[FutureX][FutureY]==2){
-            PacmanMeetRandScore(); // אין פונקציה כזאת
+            PacmanMeetRandScore();
             board[randScoreX][randScoreY]=0;
         }
         else{
@@ -595,7 +584,6 @@ function randomScoreMove(){
 }
 
 function GhostsMove2(){
-    //window.alert(board[1]);
     if(movingPoints==false){randomScoreMove();}
     for (var i=0; i<ghostsCounter; i++){
         ghostX=ghostsLocs[i][0];
@@ -915,7 +903,6 @@ function UpdatePosition() {
 		}
 	}
 	if (x == 2) {//down
-		//if (shape.j < 9 && board[shape.i][shape.j + 1] != 4) {
 		if (shape.j < 19 && board[shape.i][shape.j + 1] != 4) {
 			shape.j++;
 		}
@@ -926,7 +913,6 @@ function UpdatePosition() {
 		}
 	}
 	if (x == 4) {//right
-		//if (shape.i < 9 && board[shape.i + 1][shape.j] != 4) {
 		if (shape.i < 19 && board[shape.i + 1][shape.j] != 4) {
 			shape.i++;
 		}
@@ -977,11 +963,9 @@ function UpdatePosition() {
         if(randomNumMedicine <= 0.5){
             window.clearInterval(interval);
             interval = setInterval(UpdatePosition, 100); // pacman speed
-            // console.log("pacman speed");
         } else {
             window.clearInterval(intervalGhosts);
             intervalGhosts=setInterval(GhostsMove2, 600); // ghosts speed
-            // console.log("ghosts speed");
         }
     }
 	board[shape.i][shape.j] = 2;
@@ -989,16 +973,13 @@ function UpdatePosition() {
 		pac_color = "green";
 	}
     if(eatMedicine == true ){
-        // window.alert("here");
         if(timeEatMedicine != 0 && timeEatMedicine <= time_elapsed){
             if(randomNumMedicine <= 0.5){
                 window.clearInterval(interval);  
                 interval = setInterval(UpdatePosition, 300);
-                // console.log("pacman speed normal");
             } else {
                 window.clearInterval(intervalGhosts);
                 intervalGhosts = setInterval(GhostsMove2, 1750);
-                // console.log("ghosts speed normal");
             }
             eatMedicine = false;
             lblMedicine.value = 0;
