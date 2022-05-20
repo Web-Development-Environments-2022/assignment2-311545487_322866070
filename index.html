@@ -4,12 +4,7 @@
 		<meta charset="UTF-8">
 		<title>PacMan: Hungry Chrome</title>
 		<link rel="stylesheet" href="./style.css">
-		<!-- <link href="http://fonts.cdnfonts.com/css/destroy" rel="stylesheet"> -->
 		<link rel="icon" href="pics/chrome_pacman_1_r.png">
-		<!-- <link href="http://fonts.cdnfonts.com/css/fff-tusj" rel="stylesheet"> -->
-		<!-- <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script> -->
-		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/additional-methods.js"></script> -->
-		<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
 		<script src="./jquery-3.4.1.slim.min.js"></script>
 		<script type="text/javascript" src="./app.js"></script>
 	</head>
@@ -45,22 +40,13 @@
 			<p>
 				If you have a user login to start playing:
 				<br>
-				<!-- <img src="pics/arrow_down.png" id="arrow-img" align="center">
-				<br> -->
 				<button id="login-btn" class="btns" align="center" onclick="pageHandler('#login');">Login</button>
 				
 				<br>Otherwise, signup now and start playing:
 				<br>
 				<button id="signup-btn" class="btns" align="center" onclick="pageHandler('#signup');">Signup</button>
 			</p>
-				<!-- BUTTONS FOR TESTING ONLY -->
-				<!-- <hr>
-				<hr>
-				<h1>BUTTONS FOR TESTING ONLY
-				DELETE BEFORE SUBMISSION</h1> -->
-				<!-- <br><button id="settings-btn" class="btns" align="center" onclick="pageHandler('#settings');">Settings</button>  -->
-				<!-- <br> -->
-				<!-- <br><button id="game-btn" class="btns" align="center" onclick="startGameHandler();">Game</button> -->
+		  </div>
 
 			
 		</section>
@@ -109,7 +95,6 @@
 						<option value="30">30</option>
 						<option value="31">31</option>
 					</select>
-					<!-- <label for="month">Month:</label> -->
 					<select name="month" id="month">
 						<option value="Jan">Jan</option>
 						<option value="Feb">Feb</option>
@@ -124,7 +109,6 @@
 						<option value="Nov">Nov</option>
 						<option value="Dec">Dec</option>
 					</select>
-					<!-- <label for="year">Year:</label> -->
 					<select name="year" id="year">
 						<option value=j1900j>1900</option>
 						<option value=j1901j>1901</option>
@@ -252,7 +236,6 @@
 					</select></p>
 				</form>
 				<div id="submit_reg" align="center">
-					<!-- <input type="submit" value="Signup" class="btns" onclick="pageHandler('#settings');"> -->
 					<input type="submit" value="Signup" class="btns">
 				</div>
 				<script>
@@ -299,15 +282,16 @@
 					if(email.val().length == 0){
 						var valid=false;
 					}
-					if(users[uname]!=undefined){valid=false;}
+					if(users[uname.val()]!=undefined){
+						valid=false;
+						window.alert("This username already exists");
+					}
 					var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 					if(!email.val().match(mailformat) & email.val().length!=0){
 						alert("Invalid Email Address");
 					}
-					if(valid==false){
-						alert( "Make Sure The Password Length Is At Least 6, First And Last Name Doesn't Contain Numbers, And All Textboxes Aren't Empty!" );
-					}
 					if(valid & passValid & names){
+						window.alert("Signed Up Successfully");
 						users[uname.val()]=password.val();
 						$("#uname").val("");
 						$("#password").val("");
@@ -320,6 +304,10 @@
 						$("#year").val("j1900j");
 						pageHandler('#settings');
 					}
+					else if(users[uname.val()]==undefined)
+					{
+						window.alert( "Make Sure The Password Length Is At Least 6, First And Last Name Doesn't Contain Numbers, And All Textboxes Aren't Empty!" );
+					}
 				});
 				</script>
 			</div>
@@ -331,9 +319,7 @@
 				<hr> 
 				<br>
 				<form id="login-form"  align="center">
-					<!-- <p><label for="uname2">Username:</label> -->
 					<input type="text" id="uname2" name="uname2" placeholder="Username"></p>
-					<!-- <p><label for="password2">Password:</label> -->
 					<input type="password" id="password2" name="password2" placeholder="Password"></p>
 				</form>
 				<div id="submit2" align="center">
@@ -350,6 +336,7 @@
 						}
 					}
 					if(valid){
+						lblUname.value=uname.val();
 						alert(`Welcome back ${uname.val()}!\nYou will be directed automatically to the settings page.`);
 						$("#uname2").val("");
 						$("#password2").val("");
@@ -425,13 +412,7 @@
 			</div>
 		</div>
 		</section>
-			<!-- <div id="About" >
-				About page
-			</div> -->
 			</section>
-			<!-- <div id="PlayGame" >
-				PlayGame
-			</div> -->
 		</section>
 
 		
@@ -489,18 +470,15 @@
 				<input id="lblTime" type="text" />
 				<label for="lblLives">LIVES:</label>
 				<input id="lblLives" type="text" /></h2>
-				
-				<!-- <p></p>
-				<div id="score"></div>
-				<div id="time"></div>
-				<div id="lives"></div> -->
 			</div>
 			<hr> 
 			<table id="game-table" align="center">
 				<tr>
 					<th id="settings-col" >
 						<h3>Settings:</h3>
-						<h4><label for="lblUp">UP:</label>
+						<h4><label for="lblUname">User:</label>
+						<input id="lblUname" type="text" value="k" readonly="true" style="width: 75px;"/>
+						<label for="lblUp">UP:</label>
 						<input id="lblUp" type="text" value="ArrowUp" readonly="true" style="width: 75px;"/>
 						<br><label for="lblDown">DOWN:</label>
 						<input id="lblDown" type="text" value="ArrowDown" readonly="true" style="width: 75px;"/>
