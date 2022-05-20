@@ -46,6 +46,7 @@ let movementSettingsValid=false;
 let movementSettings=[38,40,37,39];
 let numBalls=50;
 let gameTime=60;
+let wonMessage = false;
 
 let intervalTime = 300;
 let intervalGhostsTime = 1750;
@@ -733,162 +734,164 @@ function sleep(ms) {
 
 
 async function Draw() {
-    if(time_elapsed<Number(gameTime)+Number(clock) && food_left_dynamic>0){ //קביעת זמן עבור כל המשחק
-        if(food_left_dynamic<=3){check_food();}
-        if(clock==20){lblTime.value = time_elapsed.toString()+" +20 (For Clock Eat)";}//הוספת שעון שמגדיל את זמן המשחק
-        else{lblTime.value=time_elapsed;}
-        lblLives.value=lives;
-        canvas.width = canvas.width; //clean board
-        lblScore.value = score;
-        for (var i = 0; i < 20; i++) {
-            for (var j = 0; j < 20; j++) {
-                var center = new Object();
-                center.x = i * 30 + 15;
-                center.y = j * 30 + 15;
-                if (board[i][j] == 2) {
-                    if(i==shape.i && j==shape.j){
-                        context.beginPath();
-                        if(direction=='right'){//יש לצייר את הפאקמן שיהיה תמיד בכיוון האכילה
-                            context.arc(center.x, center.y, 15, 0.15 * Math.PI, 1.85 * Math.PI); // pacman circle right
-                            context.drawImage(pacmanMouthIconRight, center.x - 13, center.y - 13);
-                        }
-                        if(direction=='left'){
-                            context.arc(center.x, center.y, 15, 1.15 * Math.PI, 0.85 * Math.PI); // pacman circle left
-                            context.drawImage(pacmanMouthIconLeft, center.x - 13, center.y - 13);
-                        }
-                        if(direction=='up'){
-                            context.arc(center.x, center.y, 15, 1.65 * Math.PI, 1.35 * Math.PI); // pacman circle up
-                            context.drawImage(pacmanMouthIconUp, center.x - 13, center.y - 13);
-                        }
-                        if(direction=='down'){
-                            context.arc(center.x, center.y, 15, 0.65 * Math.PI, 0.35 * Math.PI); // pacman circle down
-                            context.drawImage(pacmanMouthIconDown, center.x - 13, center.y - 13);
-                        }
-                        context.lineTo(center.x, center.y);
-                        context.beginPath();
-                        if(direction=='right'){//יש לצייר את הפאקמן שיהיה תמיד בכיוון האכילה
-                            context.arc(center.x + 2.5, center.y - 7.5, 2.5, 0, 2 * Math.PI); // eye right
-                        }
-                        if(direction=='left'){
-                            context.arc(center.x - 2.5, center.y - 7.5, 2.5, 0, 2 * Math.PI); // eye left
-                        }
-                        if(direction=='up'){
-                            context.arc(center.x - 7.5, center.y - 2.5, 2.5, 0, 2 * Math.PI); // eye up
-                        }
-                        if(direction=='down'){
-                            context.arc(center.x + 7.5, center.y + 2.5, 2.5, 0, 2 * Math.PI); // eye down
-                        }
-                        context.fillStyle = "black"; //color
-                        context.fill();
-                    }
-                    else{
-                        board[i][j]=0;
-                    }
-                } else if (board[i][j] == 15) {
-                    randomGhost=true;
-
-                    for (var k=0; k<ghostsCounter; k++){
-                        if(ghostsLocs[k][0]==i && ghostsLocs[k][1]==j){
-							if(k == 0){
-								context.beginPath();
-								context.drawImage(firefox_ghost, center.x - 12, center.y - 12);
-								randomGhost=false;
-							} else if(k == 1){
-								context.beginPath();
-								context.drawImage(edge_ghost, center.x - 12, center.y - 12);
-								randomGhost=false;
-							} else if(k == 2){
-								context.beginPath();
-								context.drawImage(opera_ghost, center.x - 12, center.y - 12);
-								randomGhost=false;
-							} else if(k == 3){
-								context.beginPath();
-								context.drawImage(safari_ghost, center.x - 12, center.y - 12);
-								randomGhost=false;
-							}
-                        }
-                    }
-                    if(randomGhost){
-                        board[i][j]=0;
-                    }
-                } else if (board[i][j] == 31) { //ציור הניקוד הזז
-                    if(i==randScoreX && j==randScoreY){
-                        if(movingPoints==false){
-                             context.beginPath();
-                             context.drawImage(movingPointsIcon, center.x - 12, center.y - 12);
+    if(food_left_dynamic>0){
+        if(time_elapsed<Number(gameTime)+Number(clock)){ //קביעת זמן עבור כל המשחק
+            if(food_left_dynamic<=3){check_food();}
+            if(clock==20){lblTime.value = time_elapsed.toString()+" +20 (For Clock Eat)";}//הוספת שעון שמגדיל את זמן המשחק
+            else{lblTime.value=time_elapsed;}
+            lblLives.value=lives;
+            canvas.width = canvas.width; //clean board
+            lblScore.value = score;
+            for (var i = 0; i < 20; i++) {
+                for (var j = 0; j < 20; j++) {
+                    var center = new Object();
+                    center.x = i * 30 + 15;
+                    center.y = j * 30 + 15;
+                    if (board[i][j] == 2) {
+                        if(i==shape.i && j==shape.j){
+                            context.beginPath();
+                            if(direction=='right'){//יש לצייר את הפאקמן שיהיה תמיד בכיוון האכילה
+                                context.arc(center.x, center.y, 15, 0.15 * Math.PI, 1.85 * Math.PI); // pacman circle right
+                                context.drawImage(pacmanMouthIconRight, center.x - 13, center.y - 13);
+                            }
+                            if(direction=='left'){
+                                context.arc(center.x, center.y, 15, 1.15 * Math.PI, 0.85 * Math.PI); // pacman circle left
+                                context.drawImage(pacmanMouthIconLeft, center.x - 13, center.y - 13);
+                            }
+                            if(direction=='up'){
+                                context.arc(center.x, center.y, 15, 1.65 * Math.PI, 1.35 * Math.PI); // pacman circle up
+                                context.drawImage(pacmanMouthIconUp, center.x - 13, center.y - 13);
+                            }
+                            if(direction=='down'){
+                                context.arc(center.x, center.y, 15, 0.65 * Math.PI, 0.35 * Math.PI); // pacman circle down
+                                context.drawImage(pacmanMouthIconDown, center.x - 13, center.y - 13);
+                            }
+                            context.lineTo(center.x, center.y);
+                            context.beginPath();
+                            if(direction=='right'){//יש לצייר את הפאקמן שיהיה תמיד בכיוון האכילה
+                                context.arc(center.x + 2.5, center.y - 7.5, 2.5, 0, 2 * Math.PI); // eye right
+                            }
+                            if(direction=='left'){
+                                context.arc(center.x - 2.5, center.y - 7.5, 2.5, 0, 2 * Math.PI); // eye left
+                            }
+                            if(direction=='up'){
+                                context.arc(center.x - 7.5, center.y - 2.5, 2.5, 0, 2 * Math.PI); // eye up
+                            }
+                            if(direction=='down'){
+                                context.arc(center.x + 7.5, center.y + 2.5, 2.5, 0, 2 * Math.PI); // eye down
+                            }
+                            context.fillStyle = "black"; //color
+                            context.fill();
                         }
                         else{
                             board[i][j]=0;
                         }
-                    }
-                    else{
-                        board[i][j]=0;
-                    }
-                } else if (board[i][j] == 1) { // small ball - 5 pts
-                    context.beginPath();
-                    context.arc(center.x, center.y, 7.5, 0, 2 * Math.PI); // black circle- 5 pts
-                    context.fillStyle = smallBallColor; //color
-                    context.fill();
-                } else if (board[i][j] == 5) { // medium ball - 15 pts קביעת צבעים לכדורים
-                    context.beginPath();
-                    context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // green circle- 15 pts
-                    context.fillStyle = mediumBallColor; //color
-                    context.fill();
-                } else if (board[i][j] == 10) {// big ball - 25 pts קביעת צבעים לכדורים
-                    context.beginPath();
-                    context.arc(center.x, center.y, 12.5, 0, 2 * Math.PI); // blue circle- 25 pts
-                    context.fillStyle = bigBallColor; //color
-                    context.fill();
-                } else if (board[i][j] == 11){ // Medicine
-                    context.beginPath();
-                    context.drawImage(medicineIcon, center.x - 13, center.y - 13);
-                } else if (board[i][j] == 20) { // clock
-                    context.beginPath();
-                    context.drawImage(clockIcon, center.x - 13, center.y - 13); // clock
-                } else if (board[i][j] == 4) { // walls color
-                    context.beginPath();
-                    context.rect(center.x - 15, center.y - 15, 30, 30);
-                    context.fillStyle = "grey"; //color
-                    context.fill();
-                }
-                else if (board[i][j] == 25){ // Extra Life
-                    context.beginPath();
-                    context.drawImage(extraLifeIcon, center.x - 13, center.y - 13); // Extra Life
-                }
-                else if (board[i][j] == 30){ // Double Extra Life
-                    context.beginPath();
-                    context.drawImage(doubleExtraLifeIcon, center.x - 13, center.y - 13);
-                }
+                    } else if (board[i][j] == 15) {
+                        randomGhost=true;
 
+                        for (var k=0; k<ghostsCounter; k++){
+                            if(ghostsLocs[k][0]==i && ghostsLocs[k][1]==j){
+                                if(k == 0){
+                                    context.beginPath();
+                                    context.drawImage(firefox_ghost, center.x - 12, center.y - 12);
+                                    randomGhost=false;
+                                } else if(k == 1){
+                                    context.beginPath();
+                                    context.drawImage(edge_ghost, center.x - 12, center.y - 12);
+                                    randomGhost=false;
+                                } else if(k == 2){
+                                    context.beginPath();
+                                    context.drawImage(opera_ghost, center.x - 12, center.y - 12);
+                                    randomGhost=false;
+                                } else if(k == 3){
+                                    context.beginPath();
+                                    context.drawImage(safari_ghost, center.x - 12, center.y - 12);
+                                    randomGhost=false;
+                                }
+                            }
+                        }
+                        if(randomGhost){
+                            board[i][j]=0;
+                        }
+                    } else if (board[i][j] == 31) { //ציור הניקוד הזז
+                        if(i==randScoreX && j==randScoreY){
+                            if(movingPoints==false){
+                                context.beginPath();
+                                context.drawImage(movingPointsIcon, center.x - 12, center.y - 12);
+                            }
+                            else{
+                                board[i][j]=0;
+                            }
+                        }
+                        else{
+                            board[i][j]=0;
+                        }
+                    } else if (board[i][j] == 1) { // small ball - 5 pts
+                        context.beginPath();
+                        context.arc(center.x, center.y, 7.5, 0, 2 * Math.PI); // black circle- 5 pts
+                        context.fillStyle = smallBallColor; //color
+                        context.fill();
+                    } else if (board[i][j] == 5) { // medium ball - 15 pts קביעת צבעים לכדורים
+                        context.beginPath();
+                        context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // green circle- 15 pts
+                        context.fillStyle = mediumBallColor; //color
+                        context.fill();
+                    } else if (board[i][j] == 10) {// big ball - 25 pts קביעת צבעים לכדורים
+                        context.beginPath();
+                        context.arc(center.x, center.y, 12.5, 0, 2 * Math.PI); // blue circle- 25 pts
+                        context.fillStyle = bigBallColor; //color
+                        context.fill();
+                    } else if (board[i][j] == 11){ // Medicine
+                        context.beginPath();
+                        context.drawImage(medicineIcon, center.x - 13, center.y - 13);
+                    } else if (board[i][j] == 20) { // clock
+                        context.beginPath();
+                        context.drawImage(clockIcon, center.x - 13, center.y - 13); // clock
+                    } else if (board[i][j] == 4) { // walls color
+                        context.beginPath();
+                        context.rect(center.x - 15, center.y - 15, 30, 30);
+                        context.fillStyle = "grey"; //color
+                        context.fill();
+                    }
+                    else if (board[i][j] == 25){ // Extra Life
+                        context.beginPath();
+                        context.drawImage(extraLifeIcon, center.x - 13, center.y - 13); // Extra Life
+                    }
+                    else if (board[i][j] == 30){ // Double Extra Life
+                        context.beginPath();
+                        context.drawImage(doubleExtraLifeIcon, center.x - 13, center.y - 13);
+                    }
+
+                }
             }
         }
-	}
-	else{
-	    lblTime.value=Number(gameTime)+Number(clock);//קביעת זמן עבור כל המשחק, הוספת שעון שמגדיל את זמן המשחק
-        await sleep(1);//קביעת זמן עבור כל המשחק
-        Stop();
-        if(!song.paused){
-            song.pause();
-            song.currentTime = 0;
-        }
-        if(score < 100){
-            doBetterSong.currentTime = 0;
-            doBetterSong.play();
-            setTimeout(function(){
-                alert("You are better than " + score + " points!");
-                newGameHandler();
-            },200);
-        }
         else{
-            winnerSong.currentTime = 0;
-            winnerSong.play();
-            setTimeout(function(){
-                alert("Winner!!!");
-                newGameHandler();
-            },200);
+            lblTime.value=Number(gameTime)+Number(clock);//קביעת זמן עבור כל המשחק, הוספת שעון שמגדיל את זמן המשחק
+            await sleep(1);//קביעת זמן עבור כל המשחק
+            Stop();
+            if(!song.paused){
+                song.pause();
+                song.currentTime = 0;
+            }
+            if(score < 100){
+                doBetterSong.currentTime = 0;
+                doBetterSong.play();
+                setTimeout(function(){
+                    alert("You are better than " + score + " points!");
+                    newGameHandler();
+                },200);
+            }
+            else{
+                winnerSong.currentTime = 0;
+                winnerSong.play();
+                setTimeout(function(){
+                    alert("Winner!!!");
+                    newGameHandler();
+                },200);
+            }
+            end=Number(gameTime)+Number(clock);//הוספת שעון שמגדיל את זמן המשחק
         }
-	    end=Number(gameTime)+Number(clock);//הוספת שעון שמגדיל את זמן המשחק
-	}
+    }
 }
 
 function check_food(){
