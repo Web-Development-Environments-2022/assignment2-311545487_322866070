@@ -21,7 +21,7 @@ Link: https://web-development-environments-2022.github.io/assignment2-311545487_
 
 * Extra Time: Eat the Clock to get an additional 20 seconds ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/clock.png?raw=true)
 
-* Medicine: Eat the medicine will result in of 2 option either the PacMan becomes faster or the Ghosts become faster for 20 seconds ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/medicine.png?raw=true)
+* Medicine: Active for 20 seconds, makes the PacMan or the Ghosts move faster (Randomly) ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/medicine.png?raw=true)
 
 
 * Background music can be paused during the game. 
