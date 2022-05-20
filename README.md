@@ -9,11 +9,11 @@ Link: https://web-development-environments-2022.github.io/assignment2-311545487_
 # PacMan: Hungry Chrome
 ## Functionality:
 
-* PacMan has a spacial design ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/chrome_pacman_1_r.png?raw=true)
+* PacMan has a special design ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/chrome_pacman_1_r.png?raw=true)
 
-* Ghosts have a spacial design ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/ghost_firefox_1.png?raw=true) ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/ghost_edge_1.png?raw=true) ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/ghost_opera_1.png?raw=true) ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/ghost_safari_1.png?raw=true)
+* Ghosts have a special design ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/ghost_firefox_1.png?raw=true) ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/ghost_edge_1.png?raw=true) ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/ghost_opera_1.png?raw=true) ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/ghost_safari_1.png?raw=true)
 
-* Moving points spacial design ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/candy_ram_1.png?raw=true)
+* Moving points special design ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/candy_ram_1.png?raw=true)
 
 * Extra Life: Eat the heart to get an Extra Life ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/extra_life.png?raw=true)
 
