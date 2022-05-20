@@ -17,7 +17,7 @@ Link: https://web-development-environments-2022.github.io/assignment2-311545487_
 
 * Extra Life: Eat the heart to get an Extra Life ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/extra_life.png?raw=true)
 
-* Double Extra Life: Eat the heart to get an Double Extra Life ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/double_extra_life.png?raw=true)
+* Double Extra Life: Eat the heart to get a Double Extra Life ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/double_extra_life.png?raw=true)
 
 * Extra Time: Eat the Clock to get an additional 20 seconds ![alt text](https://github.com/Web-Development-Environments-2022/assignment2-311545487_322866070/blob/main/pics/clock.png?raw=true)
 
