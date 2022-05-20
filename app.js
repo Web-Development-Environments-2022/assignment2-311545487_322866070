@@ -882,7 +882,7 @@ async function Draw() {
                 },200);
             }
             else{
-                winnerSong.currentTime = 0;
+                // winnerSong.currentTime = 0;
                 winnerSong.play();
                 setTimeout(function(){
                     alert("Winner!!!");
@@ -1013,7 +1013,7 @@ function UpdatePosition() {
             song.pause();
             song.currentTime = 0;
         }
-        winnerSong.currentTime = 0
+        // winnerSong.currentTime = 0
         winnerSong.play();
         setTimeout(function(){
             alert("Winner!!!");
