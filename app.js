@@ -521,6 +521,10 @@ function ghostNeighbors(i,j){
     }
     return neighbors;
 }
+function PacmanMeetRandScore(){
+    score=score+50;
+    movingPoints=true;
+}
 function randomScoreMove(){
     neighbors=ghostNeighbors(randScoreX,randScoreY);
     var size=neighbors.length;
@@ -576,6 +580,7 @@ function randomScoreMove(){
     if(FutureX<20 && board[FutureX][FutureY]!=15 && board[FutureX][FutureY]!=4){
         if(board[FutureX][FutureY]==2){
             PacmanMeetRandScore(); // אין פונקציה כזאת
+            board[randScoreX][randScoreY]=0;
         }
         else{
             if(previous==2){randScorePrev=0;}
