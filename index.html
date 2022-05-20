@@ -29,32 +29,32 @@
 			  <a id="aboutBtn" >About</a>
 			</div>
 		</nav>
-		
+
 		<section id="welcome">
 		<!-- WELCOME PAGE -->
 		  <div>
 			<h1>Welcome to PacMan: Hungry Chrome</h1>
-			<hr> 
+			<hr>
 			<h2>Help Chrome-PacMan eat all the RAM he needs while evading the other browser ghosts. </h2>
 			<h3>Lets Play!</h3>
 			<p>
 				If you have a user login to start playing:
 				<br>
 				<button id="login-btn" class="btns" align="center" onclick="pageHandler('#login');">Login</button>
-				
+
 				<br>Otherwise, signup now and start playing:
 				<br>
 				<button id="signup-btn" class="btns" align="center" onclick="pageHandler('#signup');">Signup</button>
 			</p>
 		  </div>
 
-			
+
 		</section>
 		<section id="signup" class="hidden">
 			<!-- SIGNUP PAGE -->
 			<div>
 				<h1>Signup</h1>
-				<hr> 
+				<hr>
 				<form class="signup-class" id="signup-form" align="center">
 					<input type="text" id="uname" name="uname" placeholder="Username"></p>
 					<input type="password" id="password" name="password" placeholder="Password"></p>
@@ -246,7 +246,7 @@
 					var fname=$("#fname");
 					var lname=$("#lname");
 					if(fname.val().length == 0){
-						var valid=false;
+						valid=false;
 					}
 					if(/\d/.test(fname.val())){
 						names=false;
@@ -255,40 +255,40 @@
 						names=false;
 					}
 					if(!names & fname.val().length>0 & lname.val().length>0){
-						alert("First And Last Name Shouldn't Contain Numbers!");
+						valid=false;
 					}
 					if(lname.val().length == 0){
-						var valid=false;
+						valid=false;
 					}
 					var uname=$("#uname");
 					if(uname.val().length == 0){
-						var valid=false;
+						valid=false;
 					}
 					var passValid=false;
 					var password=$("#password");
-	
+
 					if(/\d/.test(password.val())){
 						if(Letters.test(password.val())){
 							passValid=true;
 						}
 					}
 					if(!passValid & password.val().length>5){
-						alert("Password Must Contain At Least One Number And Letter!");
+						valid=false;
 					}
 					if(password.val().length == 0){
-						var valid=false;
+						valid=false;
 					}
 					var email=$("#email");
 					if(email.val().length == 0){
-						var valid=false;
+						valid=false;
 					}
 					if(users[uname.val()]!=undefined){
 						valid=false;
-						window.alert("This username already exists");
+						window.alert("This Username Already Exists");
 					}
 					var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 					if(!email.val().match(mailformat) & email.val().length!=0){
-						alert("Invalid Email Address");
+						valid=false;
 					}
 					if(valid & passValid & names){
 						window.alert("Signed Up Successfully");
@@ -306,7 +306,7 @@
 					}
 					else if(users[uname.val()]==undefined)
 					{
-						window.alert( "Make Sure The Password Length Is At Least 6, First And Last Name Doesn't Contain Numbers, And All Textboxes Aren't Empty!" );
+						window.alert( "Make Sure The Password Length Is At Least 6 And Includes Numbers And Letters, First And Last Name Doesn't Contain Numbers, Mail Is Valid, And All TextBoxes Aren't Empty! :)" );
 					}
 				});
 				</script>
@@ -316,7 +316,7 @@
 			<!-- LOGIN PAGE -->
 			<div >
 				<h1>Login</h1>
-				<hr> 
+				<hr>
 				<br>
 				<form id="login-form"  align="center">
 					<input type="text" id="uname2" name="uname2" placeholder="Username"></p>
@@ -345,7 +345,7 @@
 					else{
 						alert('Username/Password are incorrect');
 					}
-					
+
 
 				});
 				</script>
@@ -357,7 +357,7 @@
 		<section id="settings" class="hidden">
 		<div>
 			<h1>Select Your Setting</h1>
-			<hr> 
+			<hr>
 			<form id="settings-form" name="settingsForm" align="center" autocomplete="off">
 				<p>
 					Up Key:
@@ -408,25 +408,25 @@
 					<br>
 					<br>
 				</div>
-				
+
 			</div>
 		</div>
 		</section>
 			</section>
 		</section>
 
-		
+
 		<!-- This code was taken from: https://www.w3schools.com/howto/howto_css_modals.asp -->
 		<div id="myModal" class="modal">
 			<div class="modal-content">
 			<span class="close">&times;</span>
 			<h1>About</h1>
-			<hr> 
+			<hr>
 			<h2>Greetings to all the RAM hungry visitors!</h2>
 			<p>Welcome to our PacMan game, we called this version "Hungry Chrome".
 			<br>The entire game is themed around Google Chrome and other web browsers.
 			<br>Created by Yonatan Abeksis and Shahar Cohen (2022).
-			<br><h2>Hope you EnJOY!</h2> 
+			<br><h2>Hope you EnJOY!</h2>
 			</div>
 		</div>
 
@@ -437,7 +437,7 @@
 			var btn = document.getElementById("aboutBtn");
 			//Get the <span> element that closes the modal
 			var span = document.getElementsByClassName("close")[0];
-			//When the user clicks the button, open the modal 
+			//When the user clicks the button, open the modal
 			btn.onclick = function() {
 			modal.style.display = "block";
 			}
@@ -471,7 +471,7 @@
 				<label for="lblLives">LIVES:</label>
 				<input id="lblLives" type="text" /></h2>
 			</div>
-			<hr> 
+			<hr>
 			<table id="game-table" align="center">
 				<tr>
 					<th id="settings-col" >
@@ -512,13 +512,13 @@
 				</tr>
 			</table>
 			<br>
-		</section> 
+		</section>
 
 		<footer id="footer" align="center">
 			<div id = "footer-text" >
 				<br>Created by Yonatan Abeksis and Shahar Cohen
 			</div>
 	 	</footer>
-		 
+
 	</body>
 </html>
